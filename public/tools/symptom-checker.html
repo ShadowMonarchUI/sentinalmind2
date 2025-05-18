@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Symptom Checker | SentinalMind</title>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicons/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Base CSS -->
+    <link href="../assets/css/theme.css" rel="stylesheet" />
+    <link href="../medical-styles.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/womens-health.html">Women's Health</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/articles">Articles</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/tools">Health Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Symptom Checker Section -->
+        <section class="py-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="display-4 fw-bold mb-4">Symptom Checker</h1>
+                        <p class="lead mb-4">Check your symptoms and get guidance on when to seek medical attention.</p>
+                        
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body p-4">
+                                <form id="symptomForm" class="needs-validation" novalidate>
+                                    <div class="mb-4">
+                                        <label class="form-label">Select Your Symptoms</label>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="fever" value="fever">
+                                                    <label class="form-check-label" for="fever">Fever</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="headache" value="headache">
+                                                    <label class="form-check-label" for="headache">Headache</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="fatigue" value="fatigue">
+                                                    <label class="form-check-label" for="fatigue">Fatigue</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="nausea" value="nausea">
+                                                    <label class="form-check-label" for="nausea">Nausea</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="pain" value="pain">
+                                                    <label class="form-check-label" for="pain">Pain</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="dizziness" value="dizziness">
+                                                    <label class="form-check-label" for="dizziness">Dizziness</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="rash" value="rash">
+                                                    <label class="form-check-label" for="rash">Rash</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="other" value="other">
+                                                    <label class="form-check-label" for="other">Other</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="symptomDuration" class="form-label">How long have you had these symptoms?</label>
+                                        <select class="form-select" id="symptomDuration" required>
+                                            <option value="">Select duration</option>
+                                            <option value="less-than-24h">Less than 24 hours</option>
+                                            <option value="1-3-days">1-3 days</option>
+                                            <option value="4-7-days">4-7 days</option>
+                                            <option value="more-than-7-days">More than 7 days</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please select symptom duration.</div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="symptomSeverity" class="form-label">How severe are your symptoms?</label>
+                                        <select class="form-select" id="symptomSeverity" required>
+                                            <option value="">Select severity</option>
+                                            <option value="mild">Mild - Noticeable but not interfering with daily activities</option>
+                                            <option value="moderate">Moderate - Somewhat interfering with daily activities</option>
+                                            <option value="severe">Severe - Significantly interfering with daily activities</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please select symptom severity.</div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="additionalInfo" class="form-label">Additional Information (Optional)</label>
+                                        <textarea class="form-control" id="additionalInfo" rows="3" placeholder="Describe your symptoms in detail..."></textarea>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100">Check Symptoms</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div id="symptomResult" class="card border-0 shadow-sm mb-4" style="display: none;">
+                            <div class="card-body p-4">
+                                <h2 class="h4 mb-3">Assessment Results</h2>
+                                <div class="alert alert-info mb-4">
+                                    <i class="bi bi-info-circle-fill me-2"></i>
+                                    <span id="assessmentMessage">Based on your symptoms, here's our assessment:</span>
+                                </div>
+                                
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="card h-100 border-0 bg-light">
+                                            <div class="card-body">
+                                                <h3 class="h5 mb-3">Recommended Actions</h3>
+                                                <ul class="list-unstyled" id="recommendedActions">
+                                                    <!-- Will be populated by JavaScript -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card h-100 border-0 bg-light">
+                                            <div class="card-body">
+                                                <h3 class="h5 mb-3">When to Seek Medical Help</h3>
+                                                <ul class="list-unstyled" id="medicalHelp">
+                                                    <!-- Will be populated by JavaScript -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h2 class="h4 mb-3">Important Disclaimer</h2>
+                                <p>This symptom checker is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+                                
+                                <div class="alert alert-warning mt-3">
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                    If you are experiencing a medical emergency, call your local emergency services immediately.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section bg-dark text-light py-8">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3><i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind</h3>
+                    <p>Providing comprehensive women's healthcare services with compassion and expertise.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="/index.html" class="text-light">Home</a></li>
+                        <li><a href="/womens-health.html" class="text-light">Women's Health</a></li>
+                        <li><a href="/articles" class="text-light">Articles</a></li>
+                        <li><a href="/tools" class="text-light">Health Tools</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Contact Us</h4>
+                    <p><i class="bi bi-geo-alt-fill me-2"></i>123 Medical Center Dr, Healthville, HV 12345</p>
+                    <p><i class="bi bi-telephone-fill me-2"></i>+1 (555) 987-6543</p>
+                    <p><i class="bi bi-envelope-fill me-2"></i>womenshealth@sentinalmind.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/theme.js"></script>
+    <script>
+        document.getElementById('symptomForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get selected symptoms
+            let symptoms = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(checkbox) {
+                symptoms.push(checkbox.value);
+            });
+            
+            // Get duration and severity
+            let duration = document.getElementById('symptomDuration').value;
+            let severity = document.getElementById('symptomSeverity').value;
+            
+            // Basic assessment logic
+            let assessment = '';
+            let actions = [];
+            let medicalHelp = [];
+            
+            if (symptoms.length === 0) {
+                assessment = 'Please select at least one symptom to get an assessment.';
+            } else {
+                // Check for emergency symptoms
+                if (symptoms.includes('fever') && severity === 'severe') {
+                    assessment = 'Your symptoms may require immediate medical attention.';
+                    medicalHelp.push('High fever with severe symptoms');
+                    medicalHelp.push('Difficulty breathing');
+                    medicalHelp.push('Severe pain');
+                } else {
+                    assessment = 'Based on your symptoms, here\'s our assessment:';
+                    
+                    // General recommendations
+                    actions.push('Rest and stay hydrated');
+                    actions.push('Monitor your symptoms');
+                    actions.push('Take over-the-counter medications as needed');
+                    
+                    // Specific recommendations based on symptoms
+                    if (symptoms.includes('fever')) {
+                        actions.push('Take fever-reducing medication if temperature is high');
+                        medicalHelp.push('Fever above 103°F (39.4°C)');
+                    }
+                    if (symptoms.includes('headache')) {
+                        actions.push('Rest in a dark, quiet room');
+                        medicalHelp.push('Severe headache with vision changes');
+                    }
+                    if (symptoms.includes('rash')) {
+                        actions.push('Avoid scratching the affected area');
+                        medicalHelp.push('Rash with fever or difficulty breathing');
+                    }
+                }
+            }
+            
+            // Update the UI
+            document.getElementById('assessmentMessage').textContent = assessment;
+            
+            let actionsList = document.getElementById('recommendedActions');
+            actionsList.innerHTML = '';
+            actions.forEach(function(action) {
+                let li = document.createElement('li');
+                li.innerHTML = '<i class="bi bi-check-circle-fill text-success me-2"></i>' + action;
+                actionsList.appendChild(li);
+            });
+            
+            let medicalHelpList = document.getElementById('medicalHelp');
+            medicalHelpList.innerHTML = '';
+            medicalHelp.forEach(function(help) {
+                let li = document.createElement('li');
+                li.innerHTML = '<i class="bi bi-exclamation-circle-fill text-danger me-2"></i>' + help;
+                medicalHelpList.appendChild(li);
+            });
+            
+            // Show result
+            document.getElementById('symptomResult').style.display = 'block';
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#F8F9FA"/>
+    
+    <!-- Dashboard Container -->
+    <rect x="100" y="100" width="600" height="400" rx="20" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"/>
+    
+    <!-- Header -->
+    <rect x="100" y="100" width="600" height="60" rx="20" fill="#2196F3"/>
+    <text x="400" y="140" font-family="Arial" font-size="24" fill="white" text-anchor="middle">Wellness Dashboard</text>
+    
+    <!-- Mood Chart -->
+    <rect x="130" y="180" width="540" height="200" rx="10" fill="#F5F5F5"/>
+    <line x1="130" y1="280" x2="670" y2="280" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="130" y1="180" x2="130" y2="380" stroke="#BDBDBD" stroke-width="1"/>
+    
+    <!-- Chart Lines -->
+    <path d="M130 250 L190 270 L250 260 L310 280 L370 240 L430 260 L490 230 L550 250 L610 220 L670 240" 
+          stroke="#2196F3" stroke-width="3" fill="none"/>
+    
+    <!-- Chart Points -->
+    <circle cx="130" cy="250" r="4" fill="#2196F3"/>
+    <circle cx="190" cy="270" r="4" fill="#2196F3"/>
+    <circle cx="250" cy="260" r="4" fill="#2196F3"/>
+    <circle cx="310" cy="280" r="4" fill="#2196F3"/>
+    <circle cx="370" cy="240" r="4" fill="#2196F3"/>
+    <circle cx="430" cy="260" r="4" fill="#2196F3"/>
+    <circle cx="490" cy="230" r="4" fill="#2196F3"/>
+    <circle cx="550" cy="250" r="4" fill="#2196F3"/>
+    <circle cx="610" cy="220" r="4" fill="#2196F3"/>
+    <circle cx="670" cy="240" r="4" fill="#2196F3"/>
+    
+    <!-- Stats Cards -->
+    <rect x="130" y="400" width="170" height="80" rx="10" fill="#E3F2FD"/>
+    <text x="215" y="440" font-family="Arial" font-size="14" fill="#2196F3" text-anchor="middle">Mood Average</text>
+    <text x="215" y="465" font-family="Arial" font-size="24" font-weight="bold" fill="#2196F3" text-anchor="middle">7.5/10</text>
+    
+    <rect x="315" y="400" width="170" height="80" rx="10" fill="#E8F5E9"/>
+    <text x="400" y="440" font-family="Arial" font-size="14" fill="#4CAF50" text-anchor="middle">Entries This Week</text>
+    <text x="400" y="465" font-family="Arial" font-size="24" font-weight="bold" fill="#4CAF50" text-anchor="middle">12</text>
+    
+    <rect x="500" y="400" width="170" height="80" rx="10" fill="#FFF3E0"/>
+    <text x="585" y="440" font-family="Arial" font-size="14" fill="#FF9800" text-anchor="middle">Insights</text>
+    <text x="585" y="465" font-family="Arial" font-size="24" font-weight="bold" fill="#FF9800" text-anchor="middle">5 New</text>
+    
+    <!-- Decorative Elements -->
+    <circle cx="50" cy="50" r="30" fill="#2196F3" opacity="0.1"/>
+    <circle cx="750" cy="550" r="40" fill="#2196F3" opacity="0.1"/>
+    <circle cx="700" cy="100" r="25" fill="#2196F3" opacity="0.1"/>
+    <circle cx="100" cy="500" r="35" fill="#2196F3" opacity="0.1"/>
+</svg> 

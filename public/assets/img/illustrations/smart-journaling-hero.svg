@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Elements -->
+    <rect width="800" height="600" fill="#F8F9FA"/>
+    
+    <!-- Decorative Circles -->
+    <circle cx="400" cy="300" r="250" fill="#E3F2FD" opacity="0.5"/>
+    <circle cx="400" cy="300" r="200" fill="#BBDEFB" opacity="0.3"/>
+    
+    <!-- Journal Book -->
+    <rect x="300" y="150" width="200" height="300" rx="10" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+    <rect x="320" y="170" width="160" height="260" rx="5" fill="#F5F5F5"/>
+    
+    <!-- Journal Lines -->
+    <line x1="340" y1="200" x2="460" y2="200" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="220" x2="460" y2="220" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="240" x2="460" y2="240" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="260" x2="460" y2="260" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="280" x2="460" y2="280" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="300" x2="460" y2="300" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="320" x2="460" y2="320" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="340" x2="460" y2="340" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="360" x2="460" y2="360" stroke="#BDBDBD" stroke-width="1"/>
+    <line x1="340" y1="380" x2="460" y2="380" stroke="#BDBDBD" stroke-width="1"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="200" cy="200" r="30" fill="#2196F3" opacity="0.2"/>
+    <circle cx="600" cy="400" r="40" fill="#2196F3" opacity="0.2"/>
+    <circle cx="150" cy="450" r="25" fill="#2196F3" opacity="0.2"/>
+    <circle cx="650" cy="150" r="35" fill="#2196F3" opacity="0.2"/>
+    
+    <!-- AI Elements -->
+    <path d="M500 250 C520 230, 540 230, 560 250" stroke="#2196F3" stroke-width="2" fill="none"/>
+    <path d="M500 270 C520 290, 540 290, 560 270" stroke="#2196F3" stroke-width="2" fill="none"/>
+    <circle cx="530" cy="260" r="5" fill="#2196F3"/>
+    
+    <!-- Emotion Icons -->
+    <circle cx="250" cy="250" r="20" fill="#4CAF50" opacity="0.8"/>
+    <path d="M240 250 Q245 260, 250 250 Q255 240, 260 250" stroke="white" stroke-width="2" fill="none"/>
+    
+    <circle cx="550" cy="350" r="20" fill="#FFC107" opacity="0.8"/>
+    <path d="M540 350 Q545 340, 550 350 Q555 360, 560 350" stroke="white" stroke-width="2" fill="none"/>
+    
+    <!-- Connection Lines -->
+    <path d="M270 250 C300 250, 320 250, 340 250" stroke="#2196F3" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+    <path d="M510 350 C480 350, 460 350, 440 350" stroke="#2196F3" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+</svg> 

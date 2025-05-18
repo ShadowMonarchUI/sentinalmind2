@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Search | SentinalMind</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="medical-styles.css" rel="stylesheet" />
+    
+    <!-- Google Maps API -->
+    <script>
+        // DOM elements
+        let searchInput;
+        let searchButton;
+        let useLocationButton;
+        let hospitalList;
+        let loadingSpinner;
+        let noResults;
+        let locationError;
+        let distanceFilter;
+        let ratingFilter;
+        let locationInfo;
+        let currentLocationText;
+        let searchRadiusText;
+        let service;
+        let infowindow;
+
+        let map;
+        let markers = [];
+        let userLocation = null;
+        let mapInitialized = false;
+
+        // Initialize DOM elements
+        function initializeElements() {
+            searchInput = document.getElementById('searchInput');
+            searchButton = document.getElementById('searchButton');
+            useLocationButton = document.getElementById('useLocationButton');
+            hospitalList = document.getElementById('hospitalList');
+            loadingSpinner = document.getElementById('loadingSpinner');
+            noResults = document.getElementById('noResults');
+            locationError = document.getElementById('locationError');
+            distanceFilter = document.getElementById('distanceFilter');
+            ratingFilter = document.getElementById('ratingFilter');
+            locationInfo = document.getElementById('locationInfo');
+            currentLocationText = document.getElementById('currentLocation');
+            searchRadiusText = document.getElementById('searchRadius');
+        }
+
+        // Initialize the map
+        function initMap() {
+            if (!mapInitialized) {
+                try {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: 40.7128, lng: -74.0060 }, // Default to New York
+                        zoom: 12
+                    });
+
+                    infowindow = new google.maps.InfoWindow();
+                    service = new google.maps.places.PlacesService(map);
+
+                    // Add click listener to map
+                    map.addListener('click', function(e) {
+                        placeMarkerAndPanTo(e.latLng, map);
+                    });
+
+                    mapInitialized = true;
+                    console.log('Map initialized successfully');
+                } catch (error) {
+                    console.error('Error initializing map:', error);
+                    document.getElementById('map').innerHTML = '<div class="alert alert-danger">Error initializing map. Please refresh the page.</div>';
+                }
+            }
+        }
+
+        // Load Google Maps API
+        async function loadGoogleMaps() {
+            try {
+                const response = await fetch('/api/maps-key');
+                const data = await response.json();
+                
+                if (!data.key) {
+                    throw new Error('Maps API key not available');
+                }
+
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initMap`;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+                console.log('Google Maps script loading...');
+            } catch (error) {
+                console.error('Error loading Google Maps:', error);
+                document.getElementById('map').innerHTML = '<div class="alert alert-danger">Error loading Google Maps. Please try again later.</div>';
+            }
+        }
+
+        // Place marker on map
+        function placeMarkerAndPanTo(latLng, map) {
+            if (!map) return;
+            const marker = new google.maps.Marker({
+                position: latLng,
+                map: map
+            });
+            map.panTo(latLng);
+            markers.push(marker);
+        }
+
+        // Clear all markers
+        function clearMarkers() {
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+        }
+
+        // Get user's current location
+        function getCurrentLocation() {
+            if (!mapInitialized) {
+                console.error('Map not initialized');
+                return;
+            }
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        if (map) {
+                            map.setCenter(userLocation);
+                            placeMarkerAndPanTo(userLocation, map);
+                            searchHospitals(userLocation);
+                        }
+                    },
+                    (error) => {
+                        console.error('Error getting location:', error);
+                        const locationError = document.getElementById('locationError');
+                        if (locationError) {
+                            locationError.style.display = 'block';
+                        }
+                    }
+                );
+            } else {
+                const locationError = document.getElementById('locationError');
+                if (locationError) {
+                    locationError.style.display = 'block';
+                }
+            }
+        }
+
+        // Search for nearby hospitals
+        function searchNearbyHospitals() {
+            const radius = parseFloat(distanceFilter.value) * 1000; // Convert km to meters
+            const request = {
+                location: userLocation,
+                radius: radius,
+                type: ['hospital']
+            };
+
+            service.nearbySearch(request, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    displayHospitals(results);
+                } else {
+                    noResults.style.display = 'block';
+                    loadingSpinner.style.display = 'none';
+                }
+            });
+        }
+
+        // Display hospitals
+        function displayHospitals(hospitals) {
+            loadingSpinner.style.display = 'none';
+            hospitalList.innerHTML = '';
+            clearMarkers();
+
+            if (hospitals.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+
+            hospitals.forEach(hospital => {
+                const hospitalCard = createHospitalCard(hospital);
+                hospitalList.appendChild(hospitalCard);
+                addMarker(hospital);
+            });
+        }
+
+        // Create hospital card
+        function createHospitalCard(hospital) {
+            const card = document.createElement('div');
+            card.className = 'hospital-card';
+
+            const distance = calculateDistance(userLocation, hospital.geometry.location);
+            
+            card.innerHTML = `
+                <img src="${hospital.photos ? hospital.photos[0].getUrl() : 'https://via.placeholder.com/400x200?text=Hospital'}" 
+                     alt="${hospital.name}" class="hospital-image">
+                <div class="hospital-info">
+                    <h3 class="hospital-name">
+                        ${hospital.name}
+                        <span class="distance-badge">${distance.toFixed(1)} km</span>
+                    </h3>
+                    <div class="hospital-details">
+                        <p><i class="bi bi-geo-alt"></i> ${hospital.vicinity}</p>
+                        ${hospital.rating ? `<p><i class="bi bi-star-fill text-warning"></i> ${hospital.rating} (${hospital.user_ratings_total} reviews)</p>` : ''}
+                    </div>
+                    <div class="hospital-amenities">
+                        ${hospital.types ? hospital.types.map(type => `
+                            <span class="amenity-badge">${type.replace(/_/g, ' ')}</span>
+                        `).join('') : ''}
+                    </div>
+                    <div class="hospital-actions">
+                        <button class="btn btn-primary" onclick="getDirections(${hospital.geometry.location.lat()}, ${hospital.geometry.location.lng()})">
+                            <i class="bi bi-navigation me-2"></i>Get Directions
+                        </button>
+                        <button class="btn btn-outline-primary" onclick="viewDetails('${hospital.place_id}')">
+                            <i class="bi bi-info-circle me-2"></i>Details
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Add marker to map
+        function addMarker(hospital) {
+            const marker = new google.maps.Marker({
+                position: hospital.geometry.location,
+                map: map,
+                title: hospital.name
+            });
+
+            marker.addListener('click', () => {
+                infowindow.setContent(`
+                    <div>
+                        <h5>${hospital.name}</h5>
+                        <p>${hospital.vicinity}</p>
+                        ${hospital.rating ? `<p>Rating: ${hospital.rating} (${hospital.user_ratings_total} reviews)</p>` : ''}
+                    </div>
+                `);
+                infowindow.open(map, marker);
+            });
+
+            markers.push(marker);
+        }
+
+        // Calculate distance between two points
+        function calculateDistance(point1, point2) {
+            const R = 6371; // Earth's radius in km
+            const dLat = toRad(point2.lat() - point1.lat);
+            const dLon = toRad(point2.lng() - point1.lng);
+            const lat1 = toRad(point1.lat);
+            const lat2 = toRad(point2.lat());
+
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function toRad(value) {
+            return value * Math.PI / 180;
+        }
+
+        // Get directions to hospital
+        function getDirections(lat, lng) {
+            if (userLocation) {
+                window.open(`https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${lat},${lng}`, '_blank');
+            } else {
+                alert('Please enable location services to get directions');
+            }
+        }
+
+        // View hospital details
+        function viewDetails(placeId) {
+            service.getDetails({
+                placeId: placeId,
+                fields: ['name', 'formatted_address', 'formatted_phone_number', 'rating', 'reviews', 'photos', 'website']
+            }, (place, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    // Show details in a modal or new page
+                    alert(`
+                        ${place.name}
+                        Address: ${place.formatted_address}
+                        Phone: ${place.formatted_phone_number || 'N/A'}
+                        Rating: ${place.rating || 'N/A'}
+                        Website: ${place.website || 'N/A'}
+                    `);
+                }
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                initializeElements();
+                loadGoogleMaps();
+                
+                // Add event listeners
+                if (searchButton) {
+                    searchButton.addEventListener('click', () => {
+                        if (!mapInitialized) {
+                            console.error('Map not initialized');
+                            return;
+                        }
+                        const geocoder = new google.maps.Geocoder();
+                        geocoder.geocode({ address: searchInput.value }, (results, status) => {
+                            if (status === "OK") {
+                                userLocation = results[0].geometry.location;
+                                map.setCenter(userLocation);
+                                locationInfo.style.display = 'block';
+                                currentLocationText.textContent = results[0].formatted_address;
+                                searchRadiusText.textContent = distanceFilter.value;
+                                searchNearbyHospitals();
+                            } else {
+                                locationError.style.display = 'block';
+                            }
+                        });
+                    });
+                }
+
+                if (useLocationButton) {
+                    useLocationButton.addEventListener('click', getCurrentLocation);
+                }
+
+                if (distanceFilter) {
+                    distanceFilter.addEventListener('change', () => {
+                        searchRadiusText.textContent = distanceFilter.value;
+                        if (userLocation) {
+                            searchNearbyHospitals();
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error initializing page:', error);
+            }
+        });
+    </script>
+    
+    <style>
+        .hospital-container {
+            max-width: 1200px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+        
+        .search-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .search-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .hospital-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .hospital-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .hospital-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hospital-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .hospital-info {
+            padding: 20px;
+        }
+        
+        .hospital-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .hospital-details {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .hospital-distance {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .hospital-distance i {
+            margin-right: 5px;
+        }
+        
+        .hospital-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .amenity-badge {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .hospital-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .hospital-actions button {
+            flex: 1;
+        }
+        
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-muted);
+        }
+        
+        .no-results i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+        
+        .location-error {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff3f3;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            color: #dc3545;
+        }
+        
+        .filter-section {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            min-width: 150px;
+        }
+        
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+        
+        .map-container {
+            margin-bottom: 30px;
+        }
+        
+        .location-info {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .location-info p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+        
+        .location-info strong {
+            color: var(--primary-color);
+        }
+        
+        .distance-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#doctors">Our Doctors</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    </ul>
+                    <a class="btn btn-sm btn-primary rounded-pill ms-lg-4" href="sign.html">
+                        <i class="bi bi-person-fill me-1"></i>Sign In
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hospital-container">
+        <div class="search-section">
+            <div class="search-header">
+                <h1>Find Nearby Hospitals</h1>
+                <p>Search for hospitals in your area and get directions</p>
+            </div>
+            
+            <div class="search-form">
+                <div class="search-input">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Enter your location or use current location">
+                </div>
+                <button class="btn btn-primary" id="searchButton">
+                    <i class="bi bi-search me-2"></i>Search
+                </button>
+                <button class="btn btn-outline-primary" id="useLocationButton">
+                    <i class="bi bi-geo-alt me-2"></i>Use My Location
+                </button>
+            </div>
+            
+            <div class="location-info" id="locationInfo" style="display: none;">
+                <p>Current Location: <strong id="currentLocation"></strong></p>
+                <p>Searching for hospitals within <strong id="searchRadius"></strong> km</p>
+            </div>
+            
+            <div class="filter-section">
+                <select class="form-select filter-select" id="distanceFilter">
+                    <option value="5">Within 5 km</option>
+                    <option value="10">Within 10 km</option>
+                    <option value="20">Within 20 km</option>
+                    <option value="50">Within 50 km</option>
+                </select>
+                
+                <select class="form-select filter-select" id="ratingFilter">
+                    <option value="">All Ratings</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="3">3+ Stars</option>
+                    <option value="2">2+ Stars</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+        
+        <div id="locationError" class="location-error" style="display: none;">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            Unable to get your location. Please enter your location manually.
+        </div>
+        
+        <div id="hospitalList" class="hospital-list">
+            <!-- Hospital cards will be added here dynamically -->
+        </div>
+        
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        
+        <div id="noResults" class="no-results" style="display: none;">
+            <i class="bi bi-hospital"></i>
+            <h4>No hospitals found</h4>
+            <p>Try adjusting your search criteria or location</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle & Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

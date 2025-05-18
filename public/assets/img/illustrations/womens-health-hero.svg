@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#F8F9FA"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="400" cy="300" r="250" fill="#E3F2FD" opacity="0.5"/>
+    <circle cx="400" cy="300" r="200" fill="#BBDEFB" opacity="0.3"/>
+    
+    <!-- Medical Symbol -->
+    <circle cx="400" cy="300" r="150" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+    <path d="M400 200 L400 400" stroke="#2196F3" stroke-width="8"/>
+    <path d="M300 300 L500 300" stroke="#2196F3" stroke-width="8"/>
+    
+    <!-- Female Symbol -->
+    <circle cx="400" cy="250" r="30" fill="#2196F3"/>
+    <path d="M400 280 L400 350" stroke="#2196F3" stroke-width="8"/>
+    <path d="M370 320 L430 320" stroke="#2196F3" stroke-width="8"/>
+    
+    <!-- Healthcare Elements -->
+    <circle cx="250" cy="200" r="40" fill="#4CAF50" opacity="0.8"/>
+    <path d="M240 200 L245 205 L260 190" stroke="white" stroke-width="4" fill="none"/>
+    
+    <circle cx="550" cy="400" r="40" fill="#4CAF50" opacity="0.8"/>
+    <path d="M540 400 L545 405 L560 390" stroke="white" stroke-width="4" fill="none"/>
+    
+    <!-- Decorative Circles -->
+    <circle cx="200" cy="150" r="30" fill="#2196F3" opacity="0.1"/>
+    <circle cx="600" cy="450" r="40" fill="#2196F3" opacity="0.1"/>
+    <circle cx="150" cy="400" r="25" fill="#2196F3" opacity="0.1"/>
+    <circle cx="650" cy="200" r="35" fill="#2196F3" opacity="0.1"/>
+    
+    <!-- Connection Lines -->
+    <path d="M290 200 C320 200, 340 200, 370 200" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+    <path d="M430 200 C460 200, 480 200, 510 200" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+    
+    <!-- Additional Medical Icons -->
+    <circle cx="300" cy="350" r="25" fill="#FFC107" opacity="0.8"/>
+    <path d="M290 350 L295 355 L310 340" stroke="white" stroke-width="3" fill="none"/>
+    
+    <circle cx="500" cy="250" r="25" fill="#FFC107" opacity="0.8"/>
+    <path d="M490 250 L495 255 L510 240" stroke="white" stroke-width="3" fill="none"/>
+</svg> 

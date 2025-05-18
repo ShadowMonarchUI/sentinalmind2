@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Prescription Paper -->
+    <rect x="40" y="40" width="120" height="160" rx="5" fill="#FFFFFF" stroke="#2C3E50" stroke-width="2"/>
+    
+    <!-- Prescription Lines -->
+    <line x1="60" y1="80" x2="140" y2="80" stroke="#95A5A6" stroke-width="2"/>
+    <line x1="60" y1="100" x2="140" y2="100" stroke="#95A5A6" stroke-width="2"/>
+    <line x1="60" y1="120" x2="140" y2="120" stroke="#95A5A6" stroke-width="2"/>
+    <line x1="60" y1="140" x2="140" y2="140" stroke="#95A5A6" stroke-width="2"/>
+    
+    <!-- Medical Symbols -->
+    <circle cx="100" cy="60" r="10" fill="#4A90E2"/>
+    <path d="M95 60h10M100 55v10" stroke="#FFFFFF" stroke-width="2"/>
+    
+    <!-- Scan Effect -->
+    <rect x="30" y="30" width="140" height="180" fill="none" stroke="#4A90E2" stroke-width="2" stroke-dasharray="4 4">
+        <animate attributeName="y" from="30" to="190" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Analysis Icons -->
+    <circle cx="160" cy="40" r="10" fill="#E74C3C"/>
+    <path d="M155 40l10 10M165 40l-10 10" stroke="#FFFFFF" stroke-width="2"/>
+</svg> 

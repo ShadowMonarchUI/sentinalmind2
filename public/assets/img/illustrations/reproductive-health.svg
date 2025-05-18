@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="300" fill="#F8F9FA"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="200" cy="150" r="100" fill="#E9ECEF"/>
+    
+    <!-- Main Symbol -->
+    <g transform="translate(200,150)">
+        <!-- Circular Design -->
+        <circle cx="0" cy="0" r="60" fill="#FF6B6B" opacity="0.1"/>
+        <circle cx="0" cy="0" r="40" fill="#FF6B6B" opacity="0.2"/>
+        
+        <!-- Center Element -->
+        <circle cx="0" cy="0" r="20" fill="#4A90E2"/>
+        
+        <!-- Decorative Lines -->
+        <path d="M-40 0 L40 0" stroke="#4A90E2" stroke-width="2" opacity="0.5"/>
+        <path d="M0 -40 L0 40" stroke="#4A90E2" stroke-width="2" opacity="0.5"/>
+        
+        <!-- Small Circles -->
+        <circle cx="-30" cy="-30" r="5" fill="#FF6B6B"/>
+        <circle cx="30" cy="-30" r="5" fill="#FF6B6B"/>
+        <circle cx="-30" cy="30" r="5" fill="#FF6B6B"/>
+        <circle cx="30" cy="30" r="5" fill="#FF6B6B"/>
+    </g>
+    
+    <!-- Animated Elements -->
+    <circle cx="100" cy="100" r="8" fill="#4A90E2" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="200" r="6" fill="#FF6B6B" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+</svg> 

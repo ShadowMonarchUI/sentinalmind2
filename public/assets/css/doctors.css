@@ -1,0 +1,71 @@
+.doctor-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+}
+
+.doctor-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background: #f8f9fa;
+    position: relative;
+}
+
+.doctor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.doctor-card:hover .doctor-image img {
+    transform: scale(1.05);
+}
+
+.doctor-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.doctor-info h3 {
+    margin: 0 0 5px;
+    color: #2c3e50;
+    font-size: 1.25rem;
+}
+
+.doctor-info .specialty {
+    color: #6c757d;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.doctor-info p {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #6c757d;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #0d6efd;
+} 

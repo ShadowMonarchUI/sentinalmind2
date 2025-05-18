@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="16" cy="16" r="16" fill="#2196F3"/>
+    
+    <!-- Medical Cross -->
+    <path d="M16 8 L16 24" stroke="white" stroke-width="2"/>
+    <path d="M8 16 L24 16" stroke="white" stroke-width="2"/>
+    
+    <!-- Heart Pulse -->
+    <path d="M12 16 C12 16, 14 12, 16 16 C18 20, 20 12, 22 16" stroke="white" stroke-width="1.5" fill="none"/>
+</svg> 

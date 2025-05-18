@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | SentinalMind</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="medical-styles.css" rel="stylesheet" />
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+            --secondary-gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            --accent-color: #6366F1;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --border-color: #E5E7EB;
+            --input-bg: #F9FAFB;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--primary-gradient);
+            padding: 50px 0;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 600px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .auth-image {
+            flex: 1;
+            background: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover;
+            position: relative;
+            display: none;
+        }
+        
+        .auth-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--secondary-gradient);
+            opacity: 0.9;
+        }
+        
+        .auth-image-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .auth-image-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .auth-image-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        .auth-image-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .auth-image-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .auth-image-features i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+        
+        .auth-form {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .auth-header h1 {
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .auth-header p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-tab.active {
+            color: var(--accent-color);
+        }
+        
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .form-control {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            background-color: white;
+        }
+        
+        .form-check {
+            margin-bottom: 20px;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .btn-auth {
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            border: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-auth:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+        
+        .social-auth {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .social-auth p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .social-auth p::before,
+        .social-auth p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: var(--border-color);
+        }
+        
+        .social-auth p::before {
+            left: 0;
+        }
+        
+        .social-auth p::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .social-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .social-button:hover {
+            background: var(--input-bg);
+            color: var(--accent-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .forgot-password {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #4F46E5;
+            text-decoration: underline;
+        }
+
+        .terms-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .terms-link:hover {
+            color: #4F46E5;
+            text-decoration: underline;
+        }
+        
+        @media (min-width: 992px) {
+            .auth-image {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#doctors">Our Doctors</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-image">
+                <div class="auth-image-content">
+                    <h2>Welcome to SentinalMind</h2>
+                    <p>Join SentinalMind today</p>
+                    <ul class="auth-image-features">
+                        <li><i class="bi bi-check-circle-fill"></i> Access to medical records</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Online appointment booking</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Medication reminders</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Health monitoring tools</li>
+                        <li><i class="bi bi-check-circle-fill"></i> 24/7 medical support</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="auth-form">
+                <div class="auth-header">
+                    <h1>Welcome Back</h1>
+                    <p>Please sign in to your account</p>
+                </div>
+                
+                <div class="auth-tabs">
+                    <div class="auth-tab active" onclick="switchTab('signin')">Sign In</div>
+                    <div class="auth-tab" onclick="switchTab('signup')">Sign Up</div>
+                </div>
+                
+                <!-- Sign In Form -->
+                <form id="signinForm" class="auth-form-content">
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-auth w-100">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                    </button>
+                    
+                    <div class="text-center">
+                        <a href="#" class="forgot-password">Forgot your password?</a>
+                    </div>
+                </form>
+                
+                <!-- Sign Up Form -->
+                <form id="signupForm" class="auth-form-content" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Create a password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" placeholder="Confirm your password">
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="terms">
+                        <label class="form-check-label" for="terms">
+                            I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-auth w-100">
+                        <i class="bi bi-person-plus me-2"></i>Create Account
+                    </button>
+                </form>
+                
+                <div class="social-auth">
+                    <p>Or continue with</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-button">
+                            <i class="bi bi-google"></i>
+                        </a>
+                        <a href="#" class="social-button">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="social-button">
+                            <i class="bi bi-apple"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle & Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+
+        // Form submission handlers
+        document.getElementById('signinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            const password = e.target.querySelector('input[type="password"]').value;
+
+            try {
+                const response = await fetch(`${API_URL}/auth/signin`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store token and user data
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    // Show success message
+                    showToast('Success', 'Successfully signed in!', 'success');
+                    
+                    // Redirect to home page
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    showToast('Error', data.error || 'Failed to sign in', 'error');
+                }
+            } catch (error) {
+                showToast('Error', 'An error occurred while signing in', 'error');
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = e.target.querySelector('input[type="text"]').value;
+            const email = e.target.querySelector('input[type="email"]').value;
+            const password = e.target.querySelectorAll('input[type="password"]')[0].value;
+            const confirmPassword = e.target.querySelectorAll('input[type="password"]')[1].value;
+
+            if (password !== confirmPassword) {
+                showToast('Error', 'Passwords do not match', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store token and user data
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    // Show success message
+                    showToast('Success', 'Account created successfully!', 'success');
+                    
+                    // Redirect to home page
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    showToast('Error', data.error || 'Failed to create account', 'error');
+                }
+            } catch (error) {
+                showToast('Error', 'An error occurred while creating account', 'error');
+            }
+        });
+
+        function switchTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update forms
+            document.getElementById('signinForm').style.display = tab === 'signin' ? 'block' : 'none';
+            document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
+            
+            // Update header
+            const header = document.querySelector('.auth-header');
+            if (tab === 'signin') {
+                header.innerHTML = `
+                    <h1>Welcome Back</h1>
+                    <p>Please sign in to your account</p>
+                `;
+            } else {
+                header.innerHTML = `
+                    <h1>Create Account</h1>
+                    <p>Join SentinalMind today</p>
+                `;
+            }
+        }
+
+        // Toast notification function
+        function showToast(title, message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed top-0 end-0 m-3`;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>${title}</strong><br>
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+
+            // Remove toast after it's hidden
+            toast.addEventListener('hidden.bs.toast', () => {
+                toast.remove();
+            });
+        }
+
+        // Check if user is already logged in
+        const token = localStorage.getItem('token');
+        if (token) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

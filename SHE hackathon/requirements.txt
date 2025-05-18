@@ -1,0 +1,6 @@
+# Required Python packages for depression detection project
+pandas
+numpy
+Flask
+
+scikit-learn

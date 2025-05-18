@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Support | SentinalMind</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="medical-styles.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #2c6bac;
+            --secondary-color: #3a8cc1;
+            --accent-color: #1d4e89;
+            --success-color: #2e7d32;
+            --warning-color: #f57c00;
+            --danger-color: #c62828;
+            --light-gray: #f5f7f9;
+            --dark-gray: #455a64;
+            --text-primary: #263238;
+            --text-secondary: #546e7a;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-primary);
+            padding-top: 76px;
+            line-height: 1.6;
+        }
+        
+        /* Navbar styles for smooth scrolling */
+        .navbar {
+            transition: all 0.4s ease;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            font-size: 1.3rem;
+        }
+        
+        .navbar-scrolled {
+            background-color: white !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mental-health-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 3.5rem 0;
+            color: white;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 20px rgba(44, 107, 172, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mental-health-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgzMCkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSI+PC9yZWN0PjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSI+PC9yZWN0Pjwvc3ZnPg==');
+            opacity: 0.5;
+        }
+        
+        .mental-health-header h1 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+            position: relative;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mental-health-header .lead {
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .mental-health-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .mental-health-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .mental-health-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .mental-health-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .mental-health-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .mental-health-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mental-health-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .mental-health-list li:before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .mental-health-benefits {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .mental-health-benefits h5 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .mental-health-benefits ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mental-health-benefits li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .mental-health-benefits li:before {
+            content: "✓";
+            color: var(--success-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .emergency-contact {
+            background-color: #fff3e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .emergency-contact h5 {
+            color: var(--warning-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .emergency-contact p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        
+        .emergency-contact .phone {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--warning-color);
+        }
+        
+        @media (max-width: 767px) {
+            .mental-health-header h1 {
+                font-size: 2rem;
+            }
+            
+            .mental-health-image {
+                height: 180px;
+            }
+        }
+        
+        .mental-health-benefits button {
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .mental-health-benefits button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-content {
+            border-radius: 16px;
+            border: none;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-body ol {
+            padding-left: 1.5rem;
+        }
+        
+        .modal-body li {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .mental-health-benefits h5 i {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#doctors">Our Doctors</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mental-health-header">
+        <div class="container">
+            <h1><i class="bi bi-heart-pulse me-2"></i>Mental Health Support</h1>
+            <p class="lead">Professional mental health resources and support for your well-being journey</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="row g-4">
+            <!-- Anxiety Management -->
+            <div class="col-md-6 col-lg-4">
+                <div class="mental-health-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Anxiety Management" class="mental-health-image">
+                    <h3 class="mental-health-title">Anxiety Management</h3>
+                    <p class="mental-health-description">Learn effective techniques to manage anxiety and stress in your daily life.</p>
+                    <h5>Strategies:</h5>
+                    <ul class="mental-health-list">
+                        <li>Deep breathing exercises</li>
+                        <li>Progressive muscle relaxation</li>
+                        <li>Mindfulness meditation</li>
+                        <li>Regular exercise routine</li>
+                        <li>Healthy sleep habits</li>
+                    </ul>
+                    <div class="mental-health-benefits">
+                        <h5>Benefits:</h5>
+                        <ul>
+                            <li>Reduced stress levels</li>
+                            <li>Better sleep quality</li>
+                            <li>Improved focus</li>
+                            <li>Enhanced emotional well-being</li>
+                            <li>Better coping skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Depression Support -->
+            <div class="col-md-6 col-lg-4">
+                <div class="mental-health-card">
+                    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Depression Support" class="mental-health-image">
+                    <h3 class="mental-health-title">Depression Support</h3>
+                    <p class="mental-health-description">Comprehensive support and resources for managing depression and improving mood.</p>
+                    <h5>Support Options:</h5>
+                    <ul class="mental-health-list">
+                        <li>Professional counseling</li>
+                        <li>Support groups</li>
+                        <li>Lifestyle changes</li>
+                        <li>Exercise programs</li>
+                        <li>Nutrition guidance</li>
+                    </ul>
+                    <div class="mental-health-benefits">
+                        <h5>Benefits:</h5>
+                        <ul>
+                            <li>Improved mood</li>
+                            <li>Better energy levels</li>
+                            <li>Enhanced social connections</li>
+                            <li>Positive coping strategies</li>
+                            <li>Long-term recovery support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stress Management -->
+            <div class="col-md-6 col-lg-4">
+                <div class="mental-health-card">
+                    <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Stress Management" class="mental-health-image">
+                    <h3 class="mental-health-title">Stress Management</h3>
+                    <p class="mental-health-description">Effective techniques for managing stress and maintaining work-life balance.</p>
+                    <h5>Techniques:</h5>
+                    <ul class="mental-health-list">
+                        <li>Time management skills</li>
+                        <li>Boundary setting</li>
+                        <li>Relaxation techniques</li>
+                        <li>Physical activity</li>
+                        <li>Healthy lifestyle habits</li>
+                    </ul>
+                    <div class="mental-health-benefits">
+                        <h5>Benefits:</h5>
+                        <ul>
+                            <li>Reduced stress levels</li>
+                            <li>Better productivity</li>
+                            <li>Improved relationships</li>
+                            <li>Enhanced well-being</li>
+                            <li>Better work-life balance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Support -->
+            <div class="col-12 mt-4">
+                <div class="mental-health-card">
+                    <div class="emergency-contact">
+                        <h5><i class="bi bi-exclamation-triangle-fill me-2"></i>Emergency Support</h5>
+                        <p>If you're experiencing a mental health crisis or need immediate support:</p>
+                        <p class="phone">1-800-273-8255</p>
+                        <p>Available 24/7 for confidential support and crisis intervention</p>
+                        <p>Text "HOME" to 741741 to connect with a crisis counselor</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self-Care Resources -->
+            <div class="col-12 mt-4">
+                <div class="mental-health-card">
+                    <h3 class="mental-health-title">Self-Care Resources</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="mental-health-benefits">
+                                <h5>Daily Self-Care Practices</h5>
+                                <ul>
+                                    <li>Regular exercise</li>
+                                    <li>Healthy eating</li>
+                                    <li>Quality sleep</li>
+                                    <li>Mindfulness meditation</li>
+                                    <li>Journaling</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mental-health-benefits">
+                                <h5>Professional Support</h5>
+                                <ul>
+                                    <li>Individual therapy</li>
+                                    <li>Group counseling</li>
+                                    <li>Online therapy</li>
+                                    <li>Psychiatric services</li>
+                                    <li>Support groups</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mental-health-benefits">
+                                <h5>Digital Resources</h5>
+                                <ul>
+                                    <li>Mental health apps</li>
+                                    <li>Online courses</li>
+                                    <li>Educational videos</li>
+                                    <li>Self-help guides</li>
+                                    <li>Community forums</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mindfulness & Movement Section -->
+        <div class="row g-4 mt-4">
+            <div class="col-12">
+                <div class="mental-health-card">
+                    <h3 class="mental-health-title text-center mb-4">Mindfulness & Movement Practices</h3>
+                    <div class="row g-4">
+                        <!-- Breathing Exercises -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="mental-health-benefits">
+                                <h5><i class="bi bi-wind me-2"></i>Breathing Exercises</h5>
+                                <ul>
+                                    <li>4-7-8 Breathing</li>
+                                    <li>Box Breathing</li>
+                                    <li>Diaphragmatic Breathing</li>
+                                    <li>Alternate Nostril Breathing</li>
+                                    <li>Mindful Breathing</li>
+                                </ul>
+                                <button class="btn btn-outline-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#breathingGuide">
+                                    View Guide
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Meditation Practices -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="mental-health-benefits">
+                                <h5><i class="bi bi-peace me-2"></i>Meditation</h5>
+                                <ul>
+                                    <li>Mindfulness Meditation</li>
+                                    <li>Loving-Kindness</li>
+                                    <li>Body Scan</li>
+                                    <li>Zen Meditation</li>
+                                    <li>Transcendental</li>
+                                </ul>
+                                <button class="btn btn-outline-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#meditationGuide">
+                                    View Guide
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Yoga -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="mental-health-benefits">
+                                <h5><i class="bi bi-person-workspace me-2"></i>Yoga</h5>
+                                <ul>
+                                    <li>Gentle Hatha</li>
+                                    <li>Restorative</li>
+                                    <li>Yin Yoga</li>
+                                    <li>Chair Yoga</li>
+                                    <li>Prenatal Yoga</li>
+                                </ul>
+                                <button class="btn btn-outline-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#yogaGuide">
+                                    View Guide
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tai Chi -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="mental-health-benefits">
+                                <h5><i class="bi bi-activity me-2"></i>Tai Chi</h5>
+                                <ul>
+                                    <li>Basic Forms</li>
+                                    <li>Qigong</li>
+                                    <li>Balance Exercises</li>
+                                    <li>Energy Flow</li>
+                                    <li>Mindful Movement</li>
+                                </ul>
+                                <button class="btn btn-outline-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#taichiGuide">
+                                    View Guide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breathing Exercise Modal -->
+        <div class="modal fade" id="breathingGuide" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Breathing Exercise Guide</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="breathing-exercise">
+                            <h6>4-7-8 Breathing Technique</h6>
+                            <ol>
+                                <li>Find a comfortable seated position</li>
+                                <li>Place your tongue tip behind your upper front teeth</li>
+                                <li>Exhale completely through your mouth</li>
+                                <li>Close your mouth and inhale through your nose for 4 counts</li>
+                                <li>Hold your breath for 7 counts</li>
+                                <li>Exhale through your mouth for 8 counts</li>
+                                <li>Repeat 4 times</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meditation Guide Modal -->
+        <div class="modal fade" id="meditationGuide" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Meditation Guide</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="meditation-guide">
+                            <h6>Mindfulness Meditation Steps</h6>
+                            <ol>
+                                <li>Find a quiet, comfortable space</li>
+                                <li>Set a timer for 5-10 minutes</li>
+                                <li>Focus on your breath</li>
+                                <li>Notice thoughts without judgment</li>
+                                <li>Return to breath when mind wanders</li>
+                                <li>Practice daily for best results</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yoga Guide Modal -->
+        <div class="modal fade" id="yogaGuide" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Gentle Yoga Guide</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="yoga-guide">
+                            <h6>Basic Gentle Yoga Sequence</h6>
+                            <ol>
+                                <li>Cat-Cow Stretch (5 breaths)</li>
+                                <li>Child's Pose (1 minute)</li>
+                                <li>Mountain Pose (5 breaths)</li>
+                                <li>Gentle Forward Fold (5 breaths)</li>
+                                <li>Easy Seated Twist (each side)</li>
+                                <li>Savasana (5 minutes)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tai Chi Guide Modal -->
+        <div class="modal fade" id="taichiGuide" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tai Chi Guide</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="taichi-guide">
+                            <h6>Basic Tai Chi Principles</h6>
+                            <ol>
+                                <li>Maintain proper posture</li>
+                                <li>Move slowly and mindfully</li>
+                                <li>Keep movements fluid</li>
+                                <li>Focus on breath</li>
+                                <li>Stay grounded</li>
+                                <li>Practice regularly</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navigation bar scroll behavior
+        let prevScrollPos = window.pageYOffset;
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar.offsetHeight;
+        
+        window.onscroll = function() {
+            const currentScrollPos = window.pageYOffset;
+            
+            if (prevScrollPos > currentScrollPos) {
+                // Scrolling up - show navbar
+                navbar.style.top = "0";
+            } else {
+                // Scrolling down - hide navbar
+                navbar.style.top = `-${navbarHeight}px`;
+            }
+            
+            // Add background when scrolled
+            if (currentScrollPos > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+            
+            prevScrollPos = currentScrollPos;
+        };
+    </script>
+</body>
+</html> 

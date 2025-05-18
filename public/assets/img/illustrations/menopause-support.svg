@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="300" fill="#F8F9FA"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="200" cy="150" r="100" fill="#E9ECEF"/>
+    
+    <!-- Main Symbol -->
+    <g transform="translate(200,150)">
+        <!-- Flower Design -->
+        <circle cx="0" cy="0" r="40" fill="#FF6B6B" opacity="0.1"/>
+        
+        <!-- Petals -->
+        <g>
+            <path d="M0 -30 Q10 -40 20 -30 Q30 -20 20 -10 Q10 0 0 0 Q-10 0 -20 -10 Q-30 -20 -20 -30 Q-10 -40 0 -30" 
+                  fill="#FF6B6B" opacity="0.3"/>
+            <path d="M30 0 Q40 10 30 20 Q20 30 10 20 Q0 10 0 0 Q0 -10 10 -20 Q20 -30 30 -20 Q40 -10 30 0" 
+                  fill="#FF6B6B" opacity="0.3"/>
+            <path d="M0 30 Q10 40 20 30 Q30 20 20 10 Q10 0 0 0 Q-10 0 -20 10 Q-30 20 -20 30 Q-10 40 0 30" 
+                  fill="#FF6B6B" opacity="0.3"/>
+            <path d="M-30 0 Q-40 10 -30 20 Q-20 30 -10 20 Q0 10 0 0 Q0 -10 -10 -20 Q-20 -30 -30 -20 Q-40 -10 -30 0" 
+                  fill="#FF6B6B" opacity="0.3"/>
+        </g>
+        
+        <!-- Center -->
+        <circle cx="0" cy="0" r="15" fill="#4A90E2"/>
+        
+        <!-- Decorative Dots -->
+        <circle cx="-40" cy="-40" r="4" fill="#FF6B6B"/>
+        <circle cx="40" cy="-40" r="4" fill="#FF6B6B"/>
+        <circle cx="-40" cy="40" r="4" fill="#FF6B6B"/>
+        <circle cx="40" cy="40" r="4" fill="#FF6B6B"/>
+    </g>
+    
+    <!-- Animated Elements -->
+    <circle cx="150" cy="100" r="5" fill="#4A90E2" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="200" r="3" fill="#FF6B6B" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+</svg> 

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BP and Sugar Analytics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+        }
+        .card h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-container label {
+            font-weight: bold;
+        }
+        .form-container input {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding: 8px;
+            width: calc(100% - 16px);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        .status-card {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            text-align: center;
+        }
+        .high {
+            background-color: #dc3545;
+        }
+        .normal {
+            background-color: #28a745;
+        }
+        .low {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .ideal {
+            background-color: #17a2b8;
+        }
+        .history {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .history ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .history li {
+            margin-bottom: 5px;
+        }
+        .consult-doctor {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffcccc;
+            border: 1px solid #dc3545;
+            border-radius: 4px;
+            color: #dc3545;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>BP and Sugar Analytics</h1>
+            <div class="form-container">
+                <label for="bp">Enter Blood Pressure (BP): </label>
+                <input type="number" id="bp" placeholder="e.g., 120">
+                <button onclick="addBP()">Add BP</button>
+                <br><br>
+                <label for="sugar">Enter Sugar Level: </label>
+                <input type="number" id="sugar" placeholder="e.g., 90">
+                <button onclick="addSugar()">Add Sugar</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h1>Status</h1>
+            <div id="bp-status" class="status-card ideal">BP Status: Ideal</div>
+            <div id="sugar-status" class="status-card ideal">Sugar Status: Ideal</div>
+            <div id="consult-doctor" class="consult-doctor">Please consult your doctor for further advice.</div>
+        </div>
+
+        <div class="card">
+            <h1>History</h1>
+            <div class="history">
+                <h3>BP History:</h3>
+                <ul id="bp-history"></ul>
+                <h3>Sugar History:</h3>
+                <ul id="sugar-history"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bpData = [];
+        const sugarData = [];
+        const consultDoctor = document.getElementById('consult-doctor');
+
+        function addBP() {
+            const bp = document.getElementById('bp').value;
+
+            if (bp) {
+                bpData.push(Number(bp));
+                if (bpData.length > 5) bpData.shift(); // Keep only the last 5 entries
+                document.getElementById('bp').value = '';
+                updateBPStatus(Number(bp));
+                updateBPHistory();
+            } else {
+                alert('Please enter a BP value.');
+            }
+        }
+
+        function addSugar() {
+            const sugar = document.getElementById('sugar').value;
+
+            if (sugar) {
+                sugarData.push(Number(sugar));
+                if (sugarData.length > 5) sugarData.shift(); // Keep only the last 5 entries
+                document.getElementById('sugar').value = '';
+                updateSugarStatus(Number(sugar));
+                updateSugarHistory();
+            } else {
+                alert('Please enter a Sugar value.');
+            }
+        }
+
+        function updateBPStatus(bp) {
+            const bpStatus = document.getElementById('bp-status');
+            if (bp < 90) {
+                bpStatus.textContent = 'BP Status: Low';
+                bpStatus.className = 'status-card low';
+                showConsultDoctor();
+            } else if (bp > 140) {
+                bpStatus.textContent = 'BP Status: High';
+                bpStatus.className = 'status-card high';
+                showConsultDoctor();
+            } else {
+                bpStatus.textContent = 'BP Status: Normal';
+                bpStatus.className = 'status-card normal';
+                hideConsultDoctor();
+            }
+        }
+
+        function updateSugarStatus(sugar) {
+            const sugarStatus = document.getElementById('sugar-status');
+            if (sugar < 70) {
+                sugarStatus.textContent = 'Sugar Status: Low';
+                sugarStatus.className = 'status-card low';
+                showConsultDoctor();
+            } else if (sugar > 140) {
+                sugarStatus.textContent = 'Sugar Status: High';
+                sugarStatus.className = 'status-card high';
+                showConsultDoctor();
+            } else {
+                sugarStatus.textContent = 'Sugar Status: Normal';
+                sugarStatus.className = 'status-card normal';
+                hideConsultDoctor();
+            }
+        }
+
+        function updateBPHistory() {
+            const bpHistory = document.getElementById('bp-history');
+            bpHistory.innerHTML = '';
+            bpData.forEach(bp => {
+                const li = document.createElement('li');
+                li.textContent = `BP: ${bp}`;
+                bpHistory.appendChild(li);
+            });
+        }
+
+        function updateSugarHistory() {
+            const sugarHistory = document.getElementById('sugar-history');
+            sugarHistory.innerHTML = '';
+            sugarData.forEach(sugar => {
+                const li = document.createElement('li');
+                li.textContent = `Sugar: ${sugar}`;
+                sugarHistory.appendChild(li);
+            });
+        }
+
+        function showConsultDoctor() {
+            consultDoctor.style.display = 'block';
+        }
+
+        function hideConsultDoctor() {
+            consultDoctor.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

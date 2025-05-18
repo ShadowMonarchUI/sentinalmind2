@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Yoga Figure -->
+    <path d="M100 40c-20 0-40 20-40 40s20 40 40 40 40-20 40-40-20-40-40-40z" fill="#4A90E2"/>
+    <path d="M80 80c0 20 20 40 40 40s40-20 40-40" fill="none" stroke="#2C3E50" stroke-width="2"/>
+    
+    <!-- Meditation Elements -->
+    <circle cx="100" cy="100" r="30" fill="none" stroke="#E74C3C" stroke-width="2" stroke-dasharray="4 4"/>
+    <circle cx="100" cy="100" r="20" fill="none" stroke="#4A90E2" stroke-width="2"/>
+    
+    <!-- Wellness Symbols -->
+    <path d="M40 140c10-10 20-10 30 0" stroke="#95A5A6" stroke-width="2"/>
+    <path d="M130 140c10-10 20-10 30 0" stroke="#95A5A6" stroke-width="2"/>
+    
+    <!-- Heart Rate -->
+    <path d="M60 160c10-10 20 10 30 0s20-10 30 0 20 10 30 0" stroke="#E74C3C" stroke-width="2" fill="none"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="40" cy="40" r="5" fill="#4A90E2" opacity="0.5"/>
+    <circle cx="160" cy="40" r="5" fill="#E74C3C" opacity="0.5"/>
+    <circle cx="100" cy="180" r="5" fill="#95A5A6" opacity="0.5"/>
+</svg> 

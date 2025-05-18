@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga & Meditation | SentinalMind</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="medical-styles.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #2c6bac;
+            --secondary-color: #3a8cc1;
+            --accent-color: #1d4e89;
+            --success-color: #2e7d32;
+            --warning-color: #f57c00;
+            --danger-color: #c62828;
+            --light-gray: #f5f7f9;
+            --dark-gray: #455a64;
+            --text-primary: #263238;
+            --text-secondary: #546e7a;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-primary);
+            padding-top: 76px;
+            line-height: 1.6;
+        }
+        
+        /* Navbar styles for smooth scrolling */
+        .navbar {
+            transition: all 0.4s ease;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            font-size: 1.3rem;
+        }
+        
+        .navbar-scrolled {
+            background-color: white !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .yoga-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 3.5rem 0;
+            color: white;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 20px rgba(44, 107, 172, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .yoga-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgzMCkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSI+PC9yZWN0PjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSI+PC9yZWN0Pjwvc3ZnPg==');
+            opacity: 0.5;
+        }
+        
+        .yoga-header h1 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+            position: relative;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .yoga-header .lead {
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .yoga-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .yoga-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .yoga-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .yoga-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .yoga-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .yoga-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .yoga-steps li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .yoga-steps li:before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .yoga-benefits {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .yoga-benefits h5 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .yoga-benefits ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .yoga-benefits li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .yoga-benefits li:before {
+            content: "✓";
+            color: var(--success-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .difficulty-beginner {
+            background-color: rgba(46, 125, 50, 0.1);
+            color: var(--success-color);
+        }
+        
+        .difficulty-intermediate {
+            background-color: rgba(245, 124, 0, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .difficulty-advanced {
+            background-color: rgba(198, 40, 40, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .duration-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .duration-badge i {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 767px) {
+            .yoga-header h1 {
+                font-size: 2rem;
+            }
+            
+            .yoga-image {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#doctors">Our Doctors</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="yoga-header">
+        <div class="container">
+            <h1><i class="bi bi-heart-pulse me-2"></i>Yoga & Meditation</h1>
+            <p class="lead">Discover the transformative power of yoga and meditation for your physical and mental well-being</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="row g-4">
+            <!-- Downward-Facing Dog -->
+            <div class="col-md-6 col-lg-4">
+                <div class="yoga-card">
+                    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Downward-Facing Dog" class="yoga-image">
+                    <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                    <span class="duration-badge">
+                        <i class="bi bi-clock"></i> 5-10 minutes
+                    </span>
+                    <h3 class="yoga-title">Downward-Facing Dog</h3>
+                    <p class="yoga-description">A foundational pose that stretches and strengthens the entire body while calming the mind.</p>
+                    <h5>How to Do It:</h5>
+                    <ol class="yoga-steps">
+                        <li>Start on your hands and knees</li>
+                        <li>Lift your hips up and back</li>
+                        <li>Straighten your legs</li>
+                        <li>Press your heels toward the floor</li>
+                        <li>Keep your head between your arms</li>
+                    </ol>
+                    <div class="yoga-benefits">
+                        <h5>Benefits:</h5>
+                        <ul>
+                            <li>Strengthens arms and shoulders</li>
+                            <li>Stretches hamstrings and calves</li>
+                            <li>Improves circulation</li>
+                            <li>Relieves back pain</li>
+                            <li>Calms the mind</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warrior I -->
+            <div class="col-md-6 col-lg-4">
+                <div class="yoga-card">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Warrior I" class="yoga-image">
+                    <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                    <span class="duration-badge">
+                        <i class="bi bi-clock"></i> 30-60 seconds per side
+                    </span>
+                    <h3 class="yoga-title">Warrior I</h3>
+                    <p class="yoga-description">A powerful standing pose that builds strength and stability while opening the chest and hips.</p>
+                    <h5>How to Do It:</h5>
+                    <ol class="yoga-steps">
+                        <li>Step your right foot forward</li>
+                        <li>Bend your right knee to 90 degrees</li>
+                        <li>Square your hips forward</li>
+                        <li>Raise your arms overhead</li>
+                        <li>Keep your back leg straight</li>
+                    </ol>
+                    <div class="yoga-benefits">
+                        <h5>Benefits:</h5>
+                        <ul>
+                            <li>Strengthens legs and core</li>
+                            <li>Improves balance</li>
+                            <li>Opens chest and shoulders</li>
+                            <li>Increases stamina</li>
+                            <li>Builds confidence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tree Pose -->
+            <div class="col-md-6 col-lg-4">
+                <div class="yoga-card">
+                    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Tree Pose" class="yoga-image">
+                    <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                    <span class="duration-badge">
+                        <i class="bi bi-clock"></i> 30-60 seconds per side
+                    </span>
+                    <h3 class="yoga-title">Tree Pose</h3>
+                    <p class="yoga-description">A balancing pose that improves focus and stability while strengthening the legs and core.</p>
+                    <h5>How to Do It:</h5>
+                    <ol class="yoga-steps">
+                        <li>Stand on one leg</li>
+                        <li>Place the other foot on inner thigh</li>
+                        <li>Bring hands to heart center</li>
+                        <li>Focus on a steady point</li>
+                        <li>Keep your core engaged</li>
+                    </ol>
+                    <div class="yoga-benefits">
+                        <h5>Benefits:</h5>
+                        <ul>
+                            <li>Improves balance</li>
+                            <li>Strengthens legs</li>
+                            <li>Enhances focus</li>
+                            <li>Opens hips</li>
+                            <li>Builds stability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meditation Section -->
+            <div class="col-12 mt-4">
+                <div class="yoga-card">
+                    <h3 class="yoga-title">Meditation Techniques</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="yoga-benefits">
+                                <h5>Mindfulness Meditation</h5>
+                                <p>Focus on your breath and present moment awareness.</p>
+                                <ul>
+                                    <li>Find a quiet space</li>
+                                    <li>Sit comfortably</li>
+                                    <li>Focus on your breath</li>
+                                    <li>Observe your thoughts</li>
+                                    <li>Return to breath</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="yoga-benefits">
+                                <h5>Loving-Kindness Meditation</h5>
+                                <p>Cultivate compassion and positive emotions.</p>
+                                <ul>
+                                    <li>Start with self-love</li>
+                                    <li>Extend to loved ones</li>
+                                    <li>Include neutral people</li>
+                                    <li>Extend to all beings</li>
+                                    <li>Feel the connection</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="yoga-benefits">
+                                <h5>Body Scan Meditation</h5>
+                                <p>Develop body awareness and release tension.</p>
+                                <ul>
+                                    <li>Lie down comfortably</li>
+                                    <li>Focus on each body part</li>
+                                    <li>Release tension</li>
+                                    <li>Observe sensations</li>
+                                    <li>Stay present</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navigation bar scroll behavior
+        let prevScrollPos = window.pageYOffset;
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar.offsetHeight;
+        
+        window.onscroll = function() {
+            const currentScrollPos = window.pageYOffset;
+            
+            if (prevScrollPos > currentScrollPos) {
+                // Scrolling up - show navbar
+                navbar.style.top = "0";
+            } else {
+                // Scrolling down - hide navbar
+                navbar.style.top = `-${navbarHeight}px`;
+            }
+            
+            // Add background when scrolled
+            if (currentScrollPos > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+            
+            prevScrollPos = currentScrollPos;
+        };
+    </script>
+</body>
+</html> 

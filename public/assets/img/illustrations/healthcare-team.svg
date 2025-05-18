@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="team-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#f0f9ff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="600" height="400" fill="url(#team-gradient)"/>
+    
+    <!-- Medical Team -->
+    <g transform="translate(50, 50)">
+        <!-- Doctor 1 -->
+        <g transform="translate(0, 0)">
+            <circle cx="60" cy="60" r="40" fill="#f3f4f6"/>
+            <path d="M40 100h40v120h-40z" fill="#2563eb"/>
+            <path d="M20 120h80v20h-80z" fill="#1e40af"/>
+        </g>
+        
+        <!-- Doctor 2 -->
+        <g transform="translate(120, 20)">
+            <circle cx="60" cy="60" r="40" fill="#f3f4f6"/>
+            <path d="M40 100h40v120h-40z" fill="#3b82f6"/>
+            <path d="M20 120h80v20h-80z" fill="#2563eb"/>
+        </g>
+        
+        <!-- Nurse -->
+        <g transform="translate(240, 40)">
+            <circle cx="60" cy="60" r="40" fill="#f3f4f6"/>
+            <path d="M40 100h40v120h-40z" fill="#60a5fa"/>
+            <path d="M20 120h80v20h-80z" fill="#3b82f6"/>
+        </g>
+        
+        <!-- Medical Equipment -->
+        <g transform="translate(380, 100)">
+            <!-- Medical Cross -->
+            <g transform="translate(0, 0)">
+                <rect x="-10" y="-30" width="20" height="60" fill="#2563eb"/>
+                <rect x="-30" y="-10" width="60" height="20" fill="#2563eb"/>
+            </g>
+            
+            <!-- Heart Monitor -->
+            <g transform="translate(0, 50)">
+                <rect x="-40" y="-20" width="80" height="40" rx="5" fill="#1e40af"/>
+                <path d="M-30 0c10-20 20-20 30 0s20 20 30 0" stroke="#ffffff" stroke-width="2" fill="none"/>
+            </g>
+        </g>
+    </g>
+    
+    <!-- Decorative Elements -->
+    <circle cx="50" cy="50" r="20" fill="#2563eb" opacity="0.1"/>
+    <circle cx="550" cy="350" r="30" fill="#1e40af" opacity="0.1"/>
+    <circle cx="500" cy="100" r="15" fill="#2563eb" opacity="0.1"/>
+</svg> 

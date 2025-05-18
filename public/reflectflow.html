@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReflectFlow Wellness Suite | SentinalMind</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="assets/css/theme.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #6C63FF;
+            --accent-color: #FF6B6B;
+            --text-color: #2C3E50;
+            --light-bg: #F8F9FA;
+            --dark-bg: #1A1A1A;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 140px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/img/patterns/dot-pattern.svg') repeat;
+            opacity: 0.15;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            height: 100%;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 2rem;
+            transform: rotate(-10deg);
+            transition: transform 0.4s ease;
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
+        }
+
+        .feature-card:hover .icon-wrapper {
+            transform: rotate(0deg);
+        }
+        
+        .journal-entry {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .mood-selector {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .mood-option {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: var(--light-bg);
+            border: 2px solid transparent;
+            font-size: 1.5rem;
+        }
+        
+        .mood-option:hover {
+            transform: scale(1.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+        }
+
+        .mood-option.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
+        
+        .insight-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+        
+        .prompt-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .prompt-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+        }
+
+        .form-control {
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            border-radius: 1rem;
+            padding: 1rem 2.5rem;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+            color: white !important;
+        }
+
+        .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .privacy-section {
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .privacy-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/img/patterns/security-pattern.svg') repeat;
+            opacity: 0.1;
+        }
+
+        .footer {
+            background: var(--dark-bg);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/img/patterns/footer-pattern.svg') repeat;
+            opacity: 0.1;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Additional utility classes */
+        .py-8 {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 4rem;
+        }
+
+        .min-vh-75 {
+            min-height: 75vh;
+        }
+
+        /* Text enhancements */
+        .display-4 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .display-5 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .display-4 {
+                font-size: 2.5rem;
+            }
+            
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .py-8 {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+            
+            .mood-option {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .feature-card h3 {
+            color: #2C3E50;
+            font-weight: 700;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .feature-card p {
+            color: #2C3E50;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .feature-card ul {
+            background: #F8F9FA;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .feature-card ul li {
+            color: #2C3E50;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card ul li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .feature-card ul li i {
+            color: var(--primary-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo.svg" alt="LiveDoc Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="womens-health-services.html">Women's Health</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="reflectflow.html">ReflectFlow</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#emotional-insights">Emotional Insights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="#appointment">Book Appointment</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-75">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">ReflectFlow Wellness Suite</h1>
+                    <p class="lead mb-4">Your personal wellness companion for mindful journaling, emotional insights, and holistic well-being. Start your journey to better mental health today.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#features" class="btn btn-primary btn-lg">Explore Features</a>
+                        <a href="#journal" class="btn btn-outline-primary btn-lg">Start Journaling</a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="assets/img/illustrations/smart-journaling-hero.svg" alt="ReflectFlow Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-8">
+        <div class="container">
+            <div class="text-center mb-6" data-aos="fade-up">
+                <h2 class="display-5 fw-bold">Key Features</h2>
+                <p class="lead text-muted">Discover tools designed to enhance your wellness journey</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-chat-quote"></i>
+                        </div>
+                        <h3>AI-Guided Prompts</h3>
+                        <p>Personalized journaling prompts based on your mood and goals. Get started with thoughtful questions that help you reflect deeper.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Daily reflection prompts</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Mood-based suggestions</li>
+                            <li><i class="bi bi-check-circle-fill text-primary me-2"></i>Goal-oriented questions</li>
+                        </ul>
+                        <div class="mt-4">
+                            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#promptsModal">
+                                Get AI Prompts
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card" id="emotional-insights">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h3>Emotional Insights</h3>
+                        <p>Track your emotional patterns and gain valuable insights into your mental well-being over time.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Mood tracking</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Pattern analysis</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Progress visualization</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>AI-powered sentiment analysis</li>
+                        </ul>
+                        <div class="mt-4">
+                            <a href="#sentiment-analysis" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#sentimentModal">
+                                Try Sentiment Analysis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-rainbow"></i>
+                        </div>
+                        <h3>Mindfulness Tools</h3>
+                        <p>Access guided meditation, breathing exercises, and mindfulness practices to enhance your daily routine.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Guided meditation</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Breathing exercises</li>
+                            <li><i class="bi bi-check-circle-fill text-primary me-2"></i>Mindfulness tips</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journal Section -->
+    <section id="journal" class="py-8 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="journal-entry" data-aos="fade-up">
+                        <h3 class="mb-4">Start Your Journal Entry</h3>
+                        <div class="mood-selector">
+                            <div class="mood-option">
+                                <i class="bi bi-emoji-smile fs-4"></i>
+                            </div>
+                            <div class="mood-option">
+                                <i class="bi bi-emoji-neutral fs-4"></i>
+                            </div>
+                            <div class="mood-option">
+                                <i class="bi bi-emoji-frown fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Today's Entry</label>
+                            <textarea class="form-control" rows="6" placeholder="How are you feeling today?"></textarea>
+                        </div>
+                        <button class="btn btn-primary">Save Entry</button>
+                    </div>
+                    
+                    <div class="prompt-card" data-aos="fade-up" data-aos-delay="100">
+                        <h4>Today's Prompt</h4>
+                        <p class="mb-0">What are three things you're grateful for today, and how did they make you feel?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wellness Dashboard -->
+    <section class="py-8">
+        <div class="container">
+            <div class="text-center mb-6" data-aos="fade-up">
+                <h2 class="display-5 fw-bold">Your Wellness Dashboard</h2>
+                <p class="lead text-muted">Track your progress and gain insights</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="insight-card">
+                        <h4>Mood History</h4>
+                        <p class="mb-0">Track your emotional patterns over time</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="insight-card">
+                        <h4>Journaling Streak</h4>
+                        <p class="mb-0">Maintain your daily reflection habit</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="insight-card">
+                        <h4>Emotional Insights</h4>
+                        <p class="mb-0">Discover patterns in your well-being</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="privacy-section py-8">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="display-5 fw-bold mb-4">Your Privacy Matters</h2>
+                    <p class="lead mb-4">We take your privacy seriously. Your journal entries and personal data are protected with end-to-end encryption.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="bi bi-shield-check text-primary me-2"></i>End-to-end encryption</li>
+                        <li class="mb-3"><i class="bi bi-shield-check text-primary me-2"></i>Biometric protection</li>
+                        <li class="mb-3"><i class="bi bi-shield-check text-primary me-2"></i>Secure cloud storage</li>
+                        <li><i class="bi bi-shield-check text-primary me-2"></i>Regular security audits</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="assets/img/illustrations/privacy-security.svg" alt="Privacy and Security" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-8">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <img src="assets/img/logo-white.svg" alt="LiveDoc Logo" height="40" class="mb-4">
+                    <p>Your trusted partner in healthcare, providing personalized solutions for a healthier life.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="womens-health-services.html" class="text-light text-decoration-none">Women's Health</a></li>
+                        <li class="mb-2"><a href="reflectflow.html" class="text-light text-decoration-none">ReflectFlow</a></li>
+                        <li><a href="#appointment" class="text-light text-decoration-none">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Business Hours</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">Monday - Friday: 9:00 AM - 6:00 PM</li>
+                        <li class="mb-2">Saturday: 9:00 AM - 2:00 PM</li>
+                        <li>Sunday: Closed</li>
+                    </ul>
+                    <div class="social-links mt-4">
+                        <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-light me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-light opacity-25">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 LiveDoc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sentiment Analysis Modal -->
+    <div class="modal fade" id="sentimentModal" tabindex="-1" aria-labelledby="sentimentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sentimentModalLabel">AI Sentiment Analysis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="journalText" class="form-label">Enter your journal entry</label>
+                                <textarea class="form-control" id="journalText" rows="6" placeholder="How are you feeling today?"></textarea>
+                            </div>
+                            <button class="btn btn-primary w-100" onclick="analyzeSentiment()">Analyze Sentiment</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="sentiment-result p-4 bg-light rounded">
+                                <h6 class="mb-3">Analysis Results</h6>
+                                <div id="sentimentResult" class="text-center">
+                                    <p class="text-muted">Your sentiment analysis will appear here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Emotion Trends</h6>
+                                    <div id="emotionTrends" class="mt-3">
+                                        <div class="text-center">
+                                            <p class="text-muted">Your emotion trends will appear here</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Top Themes</h6>
+                                    <div id="themeAnalysis" class="mt-3">
+                                        <div class="text-center">
+                                            <p class="text-muted">Theme analysis will appear here</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI-Guided Prompts Modal -->
+    <div class="modal fade" id="promptsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">AI-Guided Journaling Prompts</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6>Select Your Mood</h6>
+                                    <div class="mood-selector mt-3">
+                                        <div class="mood-option" data-mood="happy">
+                                            <i class="bi bi-emoji-smile"></i>
+                                        </div>
+                                        <div class="mood-option" data-mood="neutral">
+                                            <i class="bi bi-emoji-neutral"></i>
+                                        </div>
+                                        <div class="mood-option" data-mood="sad">
+                                            <i class="bi bi-emoji-frown"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6>Select Goal Category</h6>
+                                    <select class="form-select mt-3" id="goalCategory">
+                                        <option value="personal">Personal Growth</option>
+                                        <option value="career">Career Development</option>
+                                        <option value="relationships">Relationships</option>
+                                        <option value="health">Health & Wellness</option>
+                                        <option value="gratitude">Gratitude & Mindfulness</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="promptsList" class="mt-3">
+                        <div class="text-center">
+                            <p class="text-muted">Select your mood and goal category to get personalized prompts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Add active class to mood options
+        document.querySelectorAll('.mood-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function performLocalAnalysis(text) {
+            // Convert text to lowercase for consistent analysis
+            const lowerText = text.toLowerCase();
+            
+            // Define sentiment word lists with weights
+            const positiveWords = {
+                'happy': 1, 'joy': 1, 'excited': 1, 'great': 1, 'wonderful': 1,
+                'amazing': 1, 'love': 1, 'fantastic': 1, 'excellent': 1, 'good': 0.8,
+                'positive': 0.8, 'grateful': 0.8, 'thankful': 0.8, 'blessed': 0.8,
+                'peaceful': 0.8, 'calm': 0.8, 'relaxed': 0.8, 'content': 0.8
+            };
+            
+            const negativeWords = {
+                'sad': -1, 'angry': -1, 'upset': -1, 'terrible': -1, 'awful': -1,
+                'horrible': -1, 'hate': -1, 'bad': -0.8, 'negative': -0.8,
+                'anxious': -0.8, 'worried': -0.8, 'stressed': -0.8, 'tired': -0.8,
+                'exhausted': -0.8, 'frustrated': -0.8, 'disappointed': -0.8
+            };
+            
+            // Define intensifiers
+            const intensifiers = ['very', 'really', 'extremely', 'incredibly', 'absolutely'];
+            
+            // Define negations
+            const negations = ['not', 'no', 'never', 'cannot', 'cant', 'dont', 'dont'];
+            
+            // Split text into words
+            const words = lowerText.split(/\s+/);
+            let score = 0;
+            let wordCount = 0;
+            
+            // Analyze each word
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i].replace(/[.,!?]/g, '');
+                if (word.length < 2) continue;
+                
+                wordCount++;
+                
+                // Check for negations
+                const isNegated = i > 0 && negations.includes(words[i - 1]);
+                
+                // Check for intensifiers
+                const isIntensified = i > 0 && intensifiers.includes(words[i - 1]);
+                
+                // Calculate word score
+                let wordScore = 0;
+                if (positiveWords[word]) {
+                    wordScore = positiveWords[word];
+                } else if (negativeWords[word]) {
+                    wordScore = negativeWords[word];
+                }
+                
+                // Apply negation or intensification
+                if (isNegated) {
+                    wordScore = -wordScore;
+                }
+                if (isIntensified) {
+                    wordScore *= 1.5;
+                }
+                
+                score += wordScore;
+            }
+            
+            // Normalize score
+            const normalizedScore = wordCount > 0 ? score / wordCount : 0;
+            
+            // Determine sentiment
+            let sentiment = 'neutral';
+            if (normalizedScore > 0.1) {
+                sentiment = 'positive';
+            } else if (normalizedScore < -0.1) {
+                sentiment = 'negative';
+            }
+            
+            return {
+                sentiment: sentiment,
+                score: normalizedScore,
+                confidence: Math.abs(normalizedScore)
+            };
+        }
+
+        function extractThemes(text) {
+            // Convert text to lowercase
+            const lowerText = text.toLowerCase();
+            
+            // Define stop words to exclude
+            const stopWords = new Set([
+                'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'i',
+                'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at',
+                'this', 'but', 'his', 'by', 'from', 'they', 'we', 'say', 'her', 'she',
+                'or', 'an', 'will', 'my', 'one', 'all', 'would', 'there', 'their', 'what',
+                'so', 'up', 'out', 'if', 'about', 'who', 'get', 'which', 'go', 'me'
+            ]);
+            
+            // Split text into words and clean
+            const words = lowerText
+                .replace(/[.,!?]/g, '')
+                .split(/\s+/)
+                .filter(word => word.length > 2 && !stopWords.has(word));
+            
+            // Count word frequencies
+            const wordFreq = {};
+            words.forEach(word => {
+                wordFreq[word] = (wordFreq[word] || 0) + 1;
+            });
+            
+            // Convert to array and sort by frequency
+            const themes = Object.entries(wordFreq)
+                .map(([word, count]) => ({
+                    word: word,
+                    count: count,
+                    percentage: (count / words.length * 100).toFixed(1)
+                }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 5); // Get top 5 themes
+            
+            return themes;
+        }
+
+        async function analyzeSentiment() {
+            const text = document.getElementById('journalText').value;
+            if (!text) {
+                alert('Please enter some text to analyze');
+                return;
+            }
+
+            // Show loading state
+            document.getElementById('sentimentResult').innerHTML = `
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Analyzing your text...</p>
+                </div>
+            `;
+
+            try {
+                // Simple sentiment analysis
+                const analysis = performLocalAnalysis(text);
+                const suggestions = generateSuggestions(analysis.sentiment, text);
+                
+                // Store in history
+                const history = JSON.parse(localStorage.getItem('sentimentHistory') || '[]');
+                history.push({
+                    date: new Date().toISOString(),
+                    score: analysis.score,
+                    text: text.substring(0, 50) + '...',
+                    suggestions: suggestions
+                });
+                
+                if (history.length > 50) {
+                    history.shift();
+                }
+                
+                localStorage.setItem('sentimentHistory', JSON.stringify(history));
+
+                // Display results
+                displayResults(analysis, suggestions);
+                displayEmotionTrends(history);
+                displayThemeAnalysis(extractThemes(text));
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('sentimentResult').innerHTML = `
+                    <div class="alert alert-danger">
+                        Error analyzing text. Please try again.
+                    </div>
+                `;
+            }
+        }
+
+        function generateSuggestions(sentiment, text) {
+            const suggestions = [];
+            
+            if (sentiment === 'positive') {
+                suggestions.push({
+                    type: 'celebration',
+                    text: 'Great to see you feeling positive! Consider journaling about what contributed to these positive feelings.'
+                });
+                suggestions.push({
+                    type: 'gratitude',
+                    text: 'Try writing down three things you are grateful for today.'
+                });
+            } else if (sentiment === 'negative') {
+                suggestions.push({
+                    type: 'support',
+                    text: 'Remember that it is okay to feel this way. Consider reaching out to a friend or professional for support.'
+                });
+                suggestions.push({
+                    type: 'self-care',
+                    text: 'Take some time for self-care activities that you enjoy.'
+                });
+            } else {
+                suggestions.push({
+                    type: 'reflection',
+                    text: 'Consider exploring your feelings more deeply through guided journaling prompts.'
+                });
+            }
+
+            if (text.toLowerCase().includes('work') || text.toLowerCase().includes('job')) {
+                suggestions.push({
+                    type: 'work-life',
+                    text: 'Consider setting clear boundaries between work and personal time.'
+                });
+            }
+            if (text.toLowerCase().includes('tired') || text.toLowerCase().includes('exhausted')) {
+                suggestions.push({
+                    type: 'rest',
+                    text: 'Make sure to prioritize rest and sleep. Consider a short meditation before bed.'
+                });
+            }
+            if (text.toLowerCase().includes('anxious') || text.toLowerCase().includes('worried')) {
+                suggestions.push({
+                    type: 'anxiety',
+                    text: 'Try deep breathing exercises or progressive muscle relaxation.'
+                });
+            }
+
+            return suggestions;
+        }
+
+        function displayResults(analysis, suggestions) {
+            const resultDiv = document.getElementById('sentimentResult');
+            const sentiment = analysis.sentiment;
+            const score = analysis.score;
+            
+            let sentimentClass = 'text-primary';
+            if (sentiment === 'positive') {
+                sentimentClass = 'text-success';
+            } else if (sentiment === 'negative') {
+                sentimentClass = 'text-danger';
+            }
+
+            const suggestionsHtml = suggestions.map(suggestion => `
+                <div class="alert alert-info mt-2">
+                    <i class="bi bi-lightbulb me-2"></i>
+                    ${suggestion.text}
+                </div>
+            `).join('');
+
+            resultDiv.innerHTML = `
+                <div class="mb-3">
+                    <h4 class="${sentimentClass}">${sentiment.toUpperCase()}</h4>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar ${sentimentClass}" role="progressbar" 
+                             style="width: ${Math.abs(score * 100)}%" 
+                             aria-valuenow="${Math.abs(score * 100)}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            ${Math.abs(score * 100).toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <h6>Suggestions:</h6>
+                    ${suggestionsHtml}
+                </div>
+            `;
+        }
+
+        function displayEmotionTrends(trends) {
+            const trendsDiv = document.getElementById('emotionTrends');
+            if (!trends || trends.length === 0) {
+                trendsDiv.innerHTML = '<p class="text-muted">No emotion trends available yet</p>';
+                return;
+            }
+
+            // Sort trends by date
+            trends.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const trendItems = trends.map(trend => {
+                const date = new Date(trend.date).toLocaleDateString();
+                return `
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>${date}</span>
+                        <div class="progress flex-grow-1 mx-3" style="height: 8px;">
+                            <div class="progress-bar ${getSentimentClass(trend.score)}" 
+                                 role="progressbar" 
+                                 style="width: ${Math.abs(trend.score * 100)}%">
+                            </div>
+                        </div>
+                        <span>${trend.score.toFixed(2)}</span>
+                    </div>
+                `;
+            }).join('');
+
+            trendsDiv.innerHTML = `
+                <div class="trends-container">
+                    ${trendItems}
+                </div>
+                <div class="text-center mt-3">
+                    <small class="text-muted">Showing last ${trends.length} entries</small>
+                </div>
+            `;
+        }
+
+        function displayThemeAnalysis(themes) {
+            const themesDiv = document.getElementById('themeAnalysis');
+            if (!themes || themes.length === 0) {
+                themesDiv.innerHTML = '<p class="text-muted">No themes detected</p>';
+                return;
+            }
+
+            const themeItems = themes.map(theme => `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>${theme.word}</span>
+                    <span class="badge bg-primary">${theme.count} times</span>
+                </div>
+            `).join('');
+
+            themesDiv.innerHTML = `
+                <div class="themes-container">
+                    ${themeItems}
+                </div>
+                <div class="text-center mt-3">
+                    <small class="text-muted">Most frequent themes in your text</small>
+                </div>
+            `;
+        }
+
+        function getSentimentClass(score) {
+            if (score > 0.3) return 'bg-success';
+            if (score < -0.3) return 'bg-danger';
+            return 'bg-primary';
+        }
+
+        // AI-Guided Prompts functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const promptsModal = document.getElementById('promptsModal');
+            if (promptsModal) {
+                promptsModal.addEventListener('show.bs.modal', updatePrompts);
+            }
+
+            document.querySelectorAll('#promptsModal .mood-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('#promptsModal .mood-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    updatePrompts();
+                });
+            });
+
+            document.getElementById('goalCategory').addEventListener('change', updatePrompts);
+        });
+
+        function updatePrompts() {
+            const selectedMood = document.querySelector('#promptsModal .mood-option.active')?.dataset.mood || 'neutral';
+            const selectedGoal = document.getElementById('goalCategory').value;
+            const prompts = generatePrompts(selectedMood, selectedGoal);
+            displayPrompts(prompts);
+        }
+
+        function generatePrompts(mood, goal) {
+            const prompts = {
+                happy: {
+                    personal: [
+                        "What made you feel particularly joyful today?",
+                        "How can you build on this positive energy tomorrow?",
+                        "What strengths did you demonstrate today?"
+                    ],
+                    career: [
+                        "What professional achievement are you most proud of today?",
+                        "How can you leverage your current momentum?",
+                        "What skills would you like to develop further?"
+                    ],
+                    relationships: [
+                        "Who contributed to your positive mood today?",
+                        "How can you share your positive energy with others?",
+                        "What meaningful connections did you make today?"
+                    ],
+                    health: [
+                        "What healthy habits contributed to your good mood?",
+                        "How can you maintain this positive energy?",
+                        "What self-care practices worked well today?"
+                    ],
+                    gratitude: [
+                        "What are you most grateful for today?",
+                        "How did you practice mindfulness today?",
+                        "What positive moments would you like to remember?"
+                    ]
+                },
+                neutral: {
+                    personal: [
+                        "What would you like to achieve today?",
+                        "What small step can you take towards your goals?",
+                        "What are you curious about learning?"
+                    ],
+                    career: [
+                        "What professional skills would you like to develop?",
+                        "How can you add more meaning to your work?",
+                        "What career goals are you working towards?"
+                    ],
+                    relationships: [
+                        "Who would you like to connect with today?",
+                        "How can you strengthen your relationships?",
+                        "What kind of support do you need?"
+                    ],
+                    health: [
+                        "What healthy habits would you like to develop?",
+                        "How can you improve your well-being today?",
+                        "What self-care practices would you like to try?"
+                    ],
+                    gratitude: [
+                        "What simple pleasures did you enjoy today?",
+                        "What are you looking forward to?",
+                        "What made you smile today?"
+                    ]
+                },
+                sad: {
+                    personal: [
+                        "What would help you feel better right now?",
+                        "What small victory can you celebrate today?",
+                        "What self-care practices would be helpful?"
+                    ],
+                    career: [
+                        "What aspects of your work bring you satisfaction?",
+                        "How can you set better boundaries?",
+                        "What support do you need at work?"
+                    ],
+                    relationships: [
+                        "Who can you reach out to for support?",
+                        "What kind of connection would be helpful?",
+                        "How can you practice self-compassion?"
+                    ],
+                    health: [
+                        "What gentle movement would feel good?",
+                        "How can you prioritize rest today?",
+                        "What nourishing activities would help?"
+                    ],
+                    gratitude: [
+                        "What small comfort are you grateful for?",
+                        "What strength did you show today?",
+                        "What hope can you hold onto?"
+                    ]
+                }
+            };
+
+            return prompts[mood][goal] || prompts.neutral.personal;
+        }
+
+        function displayPrompts(prompts) {
+            const promptsList = document.getElementById('promptsList');
+            if (!prompts || prompts.length === 0) {
+                promptsList.innerHTML = '<p class="text-muted">No prompts available</p>';
+                return;
+            }
+
+            const promptsHtml = prompts.map((prompt, index) => `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <span class="badge bg-primary rounded-circle p-2">${index + 1}</span>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="mb-0">${prompt}</p>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="usePrompt('${prompt}')">
+                                Use Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            promptsList.innerHTML = promptsHtml;
+        }
+
+        function usePrompt(prompt) {
+            const journalText = document.querySelector('#journal textarea');
+            if (journalText) {
+                journalText.value = prompt;
+                const modal = bootstrap.Modal.getInstance(document.getElementById('promptsModal'));
+                if (modal) {
+                    modal.hide();
+                }
+                document.getElementById('journal').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html> 

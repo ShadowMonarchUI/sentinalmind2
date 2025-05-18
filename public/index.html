@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SentinalMind | Professional Medical Services</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Base CSS -->
+    <link href="assets/css/theme.css" rel="stylesheet" />
+    
+    <!-- Custom CSS for medical site -->
+    <link href="medical-styles.css" rel="stylesheet" />
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        .doctor-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .doctor-image {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .doctor-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+            z-index: 1;
+        }
+        
+        .doctor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .doctor-card:hover .doctor-image img {
+            transform: scale(1.05);
+        }
+        
+        .doctor-info {
+            padding: 25px;
+            position: relative;
+            background: #fff;
+        }
+        
+        .doctor-info h3 {
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .specialty {
+            color: #4A90E2;
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .doctor-info p {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .social-links a {
+            color: #6c757d;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            color: #4A90E2;
+            transform: translateY(-2px);
+        }
+
+        /* Add a subtle animation for the placeholder image */
+        .doctor-image img[src*="placeholder"] {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Add a loading state */
+        .doctor-image.loading {
+            position: relative;
+        }
+
+        .doctor-image.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            margin: -20px 0 0 -20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4A90E2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light py-3" data-navbar-on-scroll="data-navbar-on-scroll">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#doctors">Our Doctors</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="health-monitor.html">Health Monitor</a></li>
+                    </ul>
+                    <a class="btn btn-sm btn-primary rounded-pill ms-lg-4" href="sign.html">
+                        <i class="bi bi-person-fill me-1"></i>Sign In
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="container">
+                <div class="row align-items-center min-vh-75">
+                    <div class="col-lg-6 col-md-12" data-aos="fade-right" data-aos-duration="1000">
+                        <h1 class="display-4 fw-bold mb-4">Your Health Journey <span class="text-primary">Starts Here</span></h1>
+                        <p class="lead mb-4">Empowering women with comprehensive healthcare solutions. From reproductive health to wellness, we're here to support you at every stage of life.</p>
+                        <div class="hero-buttons">
+                            <a href="#appointment" class="btn btn-primary btn-lg rounded-pill px-4 py-2">
+                                <i class="bi bi-calendar-check me-2"></i>Book Consultation
+                            </a>
+                            <a href="#services" class="btn btn-outline-primary btn-lg rounded-pill ms-3 px-4 py-2">
+                                <i class="bi bi-grid-3x3-gap me-2"></i>Explore Services
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12" data-aos="fade-left" data-aos-duration="1000">
+                        <div class="position-relative float-animation">
+                            <img src="assets/img/illustrations/hero-doctor.svg" 
+                                 alt="Healthcare professionals" 
+                                 class="img-fluid hero-image rounded-3 shadow-lg"
+                                 loading="eager"
+                                 onerror="this.onerror=null; this.src='assets/img/illustrations/placeholder.svg';">
+                            <div class="position-absolute top-0 start-0 translate-middle">
+                                <img src="assets/img/illustrations/medical-badge.svg" 
+                                     alt="Medical Badge" 
+                                     class="img-fluid" 
+                                     style="width: 100px;"
+                                     loading="eager"
+                                     onerror="this.onerror=null; this.src='assets/img/illustrations/placeholder.svg';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-item">
+                            <h2>15+</h2>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-item">
+                            <h2>50+</h2>
+                            <p>Specialists</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-item">
+                            <h2>10k+</h2>
+                            <p>Happy Patients</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-item">
+                            <h2>24/7</h2>
+                            <p>Patient Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-8">
+            <div class="container">
+                <div class="row mb-6" data-aos="fade-up">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <span class="subtitle">Our Services</span>
+                        <h2 class="display-5 fw-bold mb-3">Women's Health Services</h2>
+                        <p class="lead text-muted">Comprehensive healthcare solutions designed specifically for women's needs. From reproductive health to wellness, we're here to support you at every stage of life.</p>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <!-- Primary Healthcare Services -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <a href="womens-health.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-heart-pulse text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">Women's Health</h3>
+                                    <p class="text-muted mb-0">Comprehensive care for reproductive health, pregnancy, and menopause</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <a href="health-monitor.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-clipboard2-pulse text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">Health Monitoring</h3>
+                                    <p class="text-muted mb-0">Track and manage your vital health metrics</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <a href="scan.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-medical text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">Prescription Analyzer</h3>
+                                    <p class="text-muted mb-0">Scan and understand your medical prescriptions</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Healthcare Facilities & Support -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <a href="hospital.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-hospital text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">Hospital Search</h3>
+                                    <p class="text-muted mb-0">Find the nearest healthcare facilities for your needs</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Wellness & Lifestyle -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                        <a href="fitnes.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-activity text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">Wellness Programs</h3>
+                                    <p class="text-muted mb-0">Personalized fitness and meditation resources</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Digital Health Support -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                        <a href="chat.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-robot text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">AI Medical Assistant</h3>
+                                    <p class="text-muted mb-0">Get instant answers to your health questions</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- ReflectFlow Wellness Suite -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+                        <a href="reflectflow.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-journal-text text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">ReflectFlow Wellness Suite</h3>
+                                    <p class="text-muted mb-0">AI-guided journaling, emotional insights, and mindfulness tools</p>
+                                   
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Mood Analysis -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
+                        <a href="emotional-insights.html" class="service-card text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
+                                <div class="card-body p-4">
+                                    <div class="service-icon bg-primary bg-opacity-10 rounded-circle p-3 mb-4 d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-emoji-heart-eyes text-primary fs-3"></i>
+                                    </div>
+                                    <h3 class="h4 mb-3">Mental Wellness</h3>
+                                    <p class="text-muted mb-0">Track and understand your emotional patterns with AI-powered analysis</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                        <img src="assets/img/illustrations/healthcare-team.svg" alt="Healthcare team" class="img-fluid about-image rounded-3 shadow-lg">
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+                        <div class="about-content">
+                            <span class="subtitle">About SentinalMind</span>
+                            <h2>Your Health Is Our Top Priority</h2>
+                            <p>At SentinalMind, we believe that everyone deserves access to excellent healthcare. Our mission is to make healthcare services as simple and accessible as possible for our patients.</p>
+                            <p>We offer comprehensive care whether you're at home or on the go, ensuring that quality healthcare is always within reach.</p>
+                            
+                            <div class="features">
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <div>
+                                        <h4 class="h5 mb-1">Expert Medical Team</h4>
+                                        <p class="mb-0">Highly qualified healthcare professionals</p>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <div>
+                                        <h4 class="h5 mb-1">24/7 Support</h4>
+                                        <p class="mb-0">Round-the-clock medical assistance</p>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <div>
+                                        <h4 class="h5 mb-1">Modern Facilities</h4>
+                                        <p class="mb-0">State-of-the-art medical equipment</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctors Section -->
+        <section id="doctors" class="doctors-section">
+            <div class="container">
+                <div class="section-header text-center mb-6" data-aos="fade-up">
+                    <span class="subtitle">Expert Team</span>
+                    <h2 class="display-5 fw-bold mb-3">Our Dedicated Doctors</h2>
+                    <p class="lead text-muted">Meet our team of experienced medical professionals dedicated to your health</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="doctor-card">
+                            <div class="doctor-image">
+                                <img src="assets/img/doctors/doctor-1.jpg" 
+                                     alt="Dr. John Smith" 
+                                     class="img-fluid"
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='assets/img/doctors/doctor-1.jpg';">
+                            </div>
+                            <div class="doctor-info">
+                                <h3>Dr. John Smith</h3>
+                                <span class="specialty">Cardiologist</span>
+                                <p>Specializes in heart health and cardiovascular diseases with over 15 years of experience.</p>
+                                <div class="social-links">
+                                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="doctor-card">
+                            <div class="doctor-image">
+                                <img src="assets/img/doctors/doctor-2.jpg" 
+                                     alt="Dr. Emily Johnson" 
+                                     class="img-fluid"
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='assets/img/doctors/doctor-placeholder.svg';">
+                            </div>
+                            <div class="doctor-info">
+                                <h3>Dr. Emily Johnson</h3>
+                                <span class="specialty">Women's Health Specialist</span>
+                                <p>Expert in women's health, gynecology, and preventive care with a focus on holistic wellness.</p>
+                                <div class="social-links">
+                                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="doctor-card">
+                            <div class="doctor-image">
+                                <img src="assets/img/doctors/doctor-3.jpg" 
+                                     alt="Dr. Jett" 
+                                     class="img-fluid"
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='assets/img/doctors/doctor-placeholder.svg';">
+                            </div>
+                            <div class="doctor-info">
+                                <h3>Dr. Jett</h3>
+                                <span class="specialty">Orthopedic Surgeon</span>
+                                <p>Specializes in advanced orthopedic procedures and sports medicine rehabilitation.</p>
+                                <div class="social-links">
+                                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="doctor-card">
+                            <div class="doctor-image">
+                                <img src="assets/img/doctors/doctor-4.jpg" 
+                                     alt="Dr. Sarah Davis" 
+                                     class="img-fluid"
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='assets/img/doctors/doctor-placeholder.svg';">
+                            </div>
+                            <div class="doctor-info">
+                                <h3>Dr. Sarah Davis</h3>
+                                <span class="specialty">Obstetrician & Gynecologist</span>
+                                <p>Dedicated to providing comprehensive women's healthcare and pregnancy support.</p>
+                                <div class="social-links">
+                                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="subtitle">Patient Testimonials</span>
+                    <h2>What Our Patients Say</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <i class="bi bi-quote quote-icon"></i>
+                                <p>"The pregnancy care program was exceptional. I felt supported and informed throughout my entire journey. The personalized care made all the difference."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h4>Sarah Thompson</h4>
+                                <span>New Mother</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <i class="bi bi-quote quote-icon"></i>
+                                <p>"The menopause support program helped me navigate this transition with confidence. The personalized guidance and community support were invaluable."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h4>Maria Rodriguez</h4>
+                                <span>Menopause Support Patient</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <i class="bi bi-quote quote-icon"></i>
+                                <p>"The mental wellness program provided the tools I needed to manage stress and anxiety. The online resources and support groups made it easy to stay connected."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h4>Emily Chen</h4>
+                                <span>Mental Wellness Patient</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Appointment Section -->
+        <section id="appointment" class="appointment-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="appointment-content">
+                            <span class="subtitle">Book an Appointment</span>
+                            <h2 class="display-5 fw-bold mb-4">Schedule Your Visit Today</h2>
+                            <p class="lead mb-4">Get the medical attention you need by scheduling an appointment with our healthcare professionals. We're here to provide you with the best care possible.</p>
+                            
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    <div>
+                                        <h4>Our Location</h4>
+                                        <p>123 Medical Center Dr, Healthville, HV 12345</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <i class="bi bi-telephone-fill"></i>
+                                    <div>
+                                        <h4>Call Us</h4>
+                                        <p>+1 (555) 987-6543</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <i class="bi bi-envelope-fill"></i>
+                                    <div>
+                                        <h4>Email Us</h4>
+                                        <p>appointments@sentinalmind.com</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <i class="bi bi-clock-fill"></i>
+                                    <div>
+                                        <h4>Working Hours</h4>
+                                        <p>Mon-Fri: 8AM-8PM, Sat: 9AM-5PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+                        <div class="appointment-form">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter your full name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" placeholder="Enter your phone number" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Preferred Date</label>
+                                            <input type="date" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Select Department</label>
+                                    <select class="form-control" required>
+                                        <option value="" selected disabled>Choose a department</option>
+                                        <option value="womens-health">Women's Health & Gynecology</option>
+                                        <option value="pregnancy">Pregnancy & Prenatal Care</option>
+                                        <option value="menopause">Menopause & Hormone Health</option>
+                                        <option value="mental">Mental Wellness</option>
+                                        <option value="nutrition">Nutrition & Diet</option>
+                                        <option value="fitness">Fitness & Exercise</option>
+                                        <option value="breast">Breast Health</option>
+                                        <option value="fertility">Fertility & Family Planning</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Preferred Time</label>
+                                    <select class="form-control" required>
+                                        <option value="" selected disabled>Select preferred time</option>
+                                        <option value="morning">Morning (8AM - 12PM)</option>
+                                        <option value="afternoon">Afternoon (12PM - 4PM)</option>
+                                        <option value="evening">Evening (4PM - 8PM)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Additional Notes</label>
+                                    <textarea class="form-control" rows="4" placeholder="Please provide any additional information or specific concerns"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill mt-4">
+                                    <i class="bi bi-calendar-check me-2"></i>Book Appointment
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <h3><i class="bi bi-heart-pulse-fill me-2"></i>SentinalMind</h3>
+                        <p>Providing quality healthcare services to improve the well-being of our communities.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#doctors">Doctors</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><a href="womens-health.html">Women's Health</a></li>
+                            <li><a href="health-monitor.html">Health Monitoring</a></li>
+                            <li><a href="scan.html">Prescription Analyzer</a></li>
+                            <li><a href="hospital.html">Hospital Search</a></li>
+                            <li><a href="fitnes.html">Wellness Programs</a></li>
+                            <li><a href="chat.html">AI Medical Assistant</a></li>
+                            <li><a href="reflectflow.html">ReflectFlow Wellness</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i class="bi bi-geo-alt-fill"></i> 123 Medical Center Dr, Healthville, HV 12345</p>
+                        <p><i class="bi bi-telephone-fill"></i> +1 (555) 987-6543</p>
+                        <p><i class="bi bi-envelope-fill"></i> info@sentinalmind.com</p>
+                        <p><i class="bi bi-clock-fill"></i> Mon-Fri: 8AM-8PM, Sat: 9AM-5PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2023 SentinalMind. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p>Privacy Policy | Terms of Service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle and additional scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            once: true,
+            duration: 1000,
+            easing: 'ease-in-out'
+        });
+    </script>
+    
+    <!-- Navbar Scroll Effect -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+ 
+<script
+  src='https://cdn.jotfor.ms/agent/embedjs/0196e1440044759dab4387b1c77d67de55fc/embed.js?skipWelcome=1&maximizable=1'>
+</script>
+</body>
+
+</html>

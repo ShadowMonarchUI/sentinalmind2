@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#F8F9FA"/>
+    
+    <!-- Service Cards -->
+    <g transform="translate(50,50)">
+        <!-- Reproductive Health Card -->
+        <rect x="0" y="0" width="300" height="200" rx="10" fill="white" stroke="#2196F3" stroke-width="2"/>
+        <circle cx="50" cy="50" r="30" fill="#E3F2FD"/>
+        <path d="M40 50 L45 55 L60 40" stroke="#2196F3" stroke-width="3" fill="none"/>
+        <text x="100" y="50" font-family="Arial" font-size="20" fill="#2196F3">Reproductive Health</text>
+        <line x1="20" y1="80" x2="280" y2="80" stroke="#E3F2FD" stroke-width="2"/>
+        <text x="20" y="110" font-family="Arial" font-size="14" fill="#666">• Regular check-ups</text>
+        <text x="20" y="140" font-family="Arial" font-size="14" fill="#666">• Family planning</text>
+        <text x="20" y="170" font-family="Arial" font-size="14" fill="#666">• Fertility consultations</text>
+    </g>
+    
+    <g transform="translate(450,50)">
+        <!-- Pregnancy Care Card -->
+        <rect x="0" y="0" width="300" height="200" rx="10" fill="white" stroke="#4CAF50" stroke-width="2"/>
+        <circle cx="50" cy="50" r="30" fill="#E8F5E9"/>
+        <path d="M40 50 L45 55 L60 40" stroke="#4CAF50" stroke-width="3" fill="none"/>
+        <text x="100" y="50" font-family="Arial" font-size="20" fill="#4CAF50">Pregnancy Care</text>
+        <line x1="20" y1="80" x2="280" y2="80" stroke="#E8F5E9" stroke-width="2"/>
+        <text x="20" y="110" font-family="Arial" font-size="14" fill="#666">• Prenatal care</text>
+        <text x="20" y="140" font-family="Arial" font-size="14" fill="#666">• Ultrasound services</text>
+        <text x="20" y="170" font-family="Arial" font-size="14" fill="#666">• Postpartum support</text>
+    </g>
+    
+    <g transform="translate(50,300)">
+        <!-- Menopause Support Card -->
+        <rect x="0" y="0" width="300" height="200" rx="10" fill="white" stroke="#FF9800" stroke-width="2"/>
+        <circle cx="50" cy="50" r="30" fill="#FFF3E0"/>
+        <path d="M40 50 L45 55 L60 40" stroke="#FF9800" stroke-width="3" fill="none"/>
+        <text x="100" y="50" font-family="Arial" font-size="20" fill="#FF9800">Menopause Support</text>
+        <line x1="20" y1="80" x2="280" y2="80" stroke="#FFF3E0" stroke-width="2"/>
+        <text x="20" y="110" font-family="Arial" font-size="14" fill="#666">• Hormone therapy</text>
+        <text x="20" y="140" font-family="Arial" font-size="14" fill="#666">• Symptom management</text>
+        <text x="20" y="170" font-family="Arial" font-size="14" fill="#666">• Lifestyle guidance</text>
+    </g>
+    
+    <g transform="translate(450,300)">
+        <!-- Preventive Care Card -->
+        <rect x="0" y="0" width="300" height="200" rx="10" fill="white" stroke="#9C27B0" stroke-width="2"/>
+        <circle cx="50" cy="50" r="30" fill="#F3E5F5"/>
+        <path d="M40 50 L45 55 L60 40" stroke="#9C27B0" stroke-width="3" fill="none"/>
+        <text x="100" y="50" font-family="Arial" font-size="20" fill="#9C27B0">Preventive Care</text>
+        <line x1="20" y1="80" x2="280" y2="80" stroke="#F3E5F5" stroke-width="2"/>
+        <text x="20" y="110" font-family="Arial" font-size="14" fill="#666">• Regular screenings</text>
+        <text x="20" y="140" font-family="Arial" font-size="14" fill="#666">• Vaccinations</text>
+        <text x="20" y="170" font-family="Arial" font-size="14" fill="#666">• Health education</text>
+    </g>
+    
+    <!-- Decorative Elements -->
+    <circle cx="400" cy="300" r="250" fill="#E3F2FD" opacity="0.1"/>
+    <circle cx="400" cy="300" r="200" fill="#BBDEFB" opacity="0.1"/>
+    
+    <!-- Connection Lines -->
+    <path d="M350 150 C380 150, 420 150, 450 150" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+    <path d="M350 450 C380 450, 420 450, 450 450" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+</svg> 

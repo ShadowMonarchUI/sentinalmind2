@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Hospital Building -->
+    <path d="M40 160h120v-100h-120z" fill="#4A90E2"/>
+    <path d="M40 60l60-40 60 40" fill="#2C3E50"/>
+    
+    <!-- Windows -->
+    <rect x="60" y="80" width="20" height="20" fill="#FFFFFF"/>
+    <rect x="120" y="80" width="20" height="20" fill="#FFFFFF"/>
+    <rect x="60" y="120" width="20" height="20" fill="#FFFFFF"/>
+    <rect x="120" y="120" width="20" height="20" fill="#FFFFFF"/>
+    
+    <!-- Medical Cross -->
+    <rect x="90" y="90" width="20" height="20" fill="#E74C3C"/>
+    <rect x="95" y="85" width="10" height="30" fill="#FFFFFF"/>
+    <rect x="85" y="95" width="30" height="10" fill="#FFFFFF"/>
+    
+    <!-- Search Icon -->
+    <circle cx="160" cy="40" r="15" fill="none" stroke="#2C3E50" stroke-width="3"/>
+    <path d="M170 50l10 10" stroke="#2C3E50" stroke-width="3" stroke-linecap="round"/>
+</svg> 

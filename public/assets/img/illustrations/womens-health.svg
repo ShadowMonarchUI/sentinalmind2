@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Female Symbol -->
+    <circle cx="100" cy="100" r="40" fill="#4A90E2" opacity="0.1"/>
+    <circle cx="100" cy="100" r="30" fill="none" stroke="#4A90E2" stroke-width="2"/>
+    <path d="M100 70v60M85 85l30 30M115 85l-30 30" stroke="#4A90E2" stroke-width="2"/>
+    
+    <!-- Heart Symbol -->
+    <path d="M100 120c-10-10-20-20-20-30 0-10 10-20 20-20s20 10 20 20c0 10-10 20-20 30z" fill="#E74C3C" opacity="0.8"/>
+    
+    <!-- Wellness Elements -->
+    <path d="M40 100c10-10 20-10 30 0" stroke="#95A5A6" stroke-width="2"/>
+    <path d="M130 100c10-10 20-10 30 0" stroke="#95A5A6" stroke-width="2"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="60" cy="60" r="5" fill="#4A90E2" opacity="0.5"/>
+    <circle cx="140" cy="60" r="5" fill="#E74C3C" opacity="0.5"/>
+    <circle cx="100" cy="160" r="5" fill="#95A5A6" opacity="0.5"/>
+    
+    <!-- Animated Pulse -->
+    <circle cx="100" cy="100" r="45" fill="none" stroke="#4A90E2" stroke-width="1" opacity="0.3">
+        <animate attributeName="r" values="45;50;45" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+</svg> 

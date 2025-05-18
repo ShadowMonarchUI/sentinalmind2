@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="500" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="500" fill="#FFF0F5"/>
+    
+    <!-- Doctor Figure -->
+    <circle cx="200" cy="150" r="80" fill="#E74C3C"/>
+    <path d="M120 250C120 200 160 180 200 180C240 180 280 200 280 250V400H120V250Z" fill="#E74C3C"/>
+    
+    <!-- Medical Cross -->
+    <path d="M180 100H220V140H180V100Z" fill="#FFFFFF"/>
+    <path d="M160 120H240V140H160V120Z" fill="#FFFFFF"/>
+    
+    <!-- Stethoscope -->
+    <path d="M280 200C280 200 300 220 300 240C300 260 280 280 260 280C240 280 220 260 220 240C220 220 240 200 240 200" stroke="#FFFFFF" stroke-width="4"/>
+    
+    <!-- Baby Symbol -->
+    <circle cx="200" cy="320" r="25" fill="#FFB6C1"/>
+    <path d="M190 310L210 310" stroke="#FFFFFF" stroke-width="3"/>
+    <path d="M190 330L210 330" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="190" cy="315" r="3" fill="#FFFFFF"/>
+    <circle cx="210" cy="315" r="3" fill="#FFFFFF"/>
+    
+    <!-- Name -->
+    <text x="200" y="450" text-anchor="middle" font-family="Arial" font-size="16" fill="#2C3E50">Dr. Sarah Davis</text>
+    <text x="200" y="470" text-anchor="middle" font-family="Arial" font-size="14" fill="#7F8C8D">OB/GYN Specialist</text>
+</svg> 

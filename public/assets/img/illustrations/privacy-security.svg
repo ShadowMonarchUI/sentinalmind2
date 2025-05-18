@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#F8F9FA"/>
+    
+    <!-- Shield Container -->
+    <path d="M400 100 L500 150 L500 300 C500 400 450 450 400 500 C350 450 300 400 300 300 L300 150 Z" 
+          fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+    
+    <!-- Lock -->
+    <rect x="350" y="200" width="100" height="120" rx="10" fill="#2196F3"/>
+    <rect x="380" y="150" width="40" height="50" rx="5" fill="#2196F3"/>
+    <circle cx="400" cy="230" r="15" fill="white"/>
+    
+    <!-- Security Elements -->
+    <circle cx="400" cy="300" r="80" fill="#BBDEFB" opacity="0.3"/>
+    <path d="M400 250 L420 280 L450 280 L425 300 L435 330 L400 315 L365 330 L375 300 L350 280 L380 280 Z" 
+          fill="#2196F3"/>
+    
+    <!-- Encryption Symbols -->
+    <text x="400" y="400" font-family="Arial" font-size="14" fill="#2196F3" text-anchor="middle">End-to-End Encryption</text>
+    
+    <!-- Decorative Elements -->
+    <circle cx="200" cy="200" r="30" fill="#2196F3" opacity="0.1"/>
+    <circle cx="600" cy="400" r="40" fill="#2196F3" opacity="0.1"/>
+    <circle cx="150" cy="450" r="25" fill="#2196F3" opacity="0.1"/>
+    <circle cx="650" cy="150" r="35" fill="#2196F3" opacity="0.1"/>
+    
+    <!-- Security Icons -->
+    <circle cx="300" cy="250" r="20" fill="#4CAF50" opacity="0.8"/>
+    <path d="M290 250 L295 255 L310 240" stroke="white" stroke-width="2" fill="none"/>
+    
+    <circle cx="500" cy="250" r="20" fill="#4CAF50" opacity="0.8"/>
+    <path d="M490 250 L495 255 L510 240" stroke="white" stroke-width="2" fill="none"/>
+    
+    <!-- Connection Lines -->
+    <path d="M320 250 C340 250, 360 250, 380 250" stroke="#2196F3" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+    <path d="M420 250 C440 250, 460 250, 480 250" stroke="#2196F3" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+</svg> 

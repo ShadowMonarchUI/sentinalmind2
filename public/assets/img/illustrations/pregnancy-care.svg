@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="300" fill="#F8F9FA"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="200" cy="150" r="100" fill="#E9ECEF"/>
+    
+    <!-- Main Symbol -->
+    <g transform="translate(200,150)">
+        <!-- Heart Shape -->
+        <path d="M0 -40 C-20 -40 -40 -20 -40 0 C-40 20 -20 40 0 40 C20 40 40 20 40 0 C40 -20 20 -40 0 -40" 
+              fill="#FF6B6B" opacity="0.2"/>
+        
+        <!-- Center Circle -->
+        <circle cx="0" cy="0" r="30" fill="#4A90E2" opacity="0.8"/>
+        
+        <!-- Decorative Elements -->
+        <path d="M-20 -20 Q0 -30 20 -20" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+        <path d="M-20 20 Q0 30 20 20" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+        
+        <!-- Small Hearts -->
+        <path d="M-50 -20 C-55 -20 -60 -15 -60 -10 C-60 -5 -55 0 -50 0 C-45 0 -40 -5 -40 -10 C-40 -15 -45 -20 -50 -20" 
+              fill="#FF6B6B" opacity="0.6"/>
+        <path d="M50 -20 C45 -20 40 -15 40 -10 C40 -5 45 0 50 0 C55 0 60 -5 60 -10 C60 -15 55 -20 50 -20" 
+              fill="#FF6B6B" opacity="0.6"/>
+    </g>
+    
+    <!-- Animated Elements -->
+    <circle cx="150" cy="100" r="6" fill="#4A90E2" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="200" r="4" fill="#FF6B6B" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+</svg> 

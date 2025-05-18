@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="500" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="500" fill="#F5F0FF"/>
+    
+    <!-- Doctor Figure -->
+    <circle cx="200" cy="150" r="80" fill="#9B59B6"/>
+    <path d="M120 250C120 200 160 180 200 180C240 180 280 200 280 250V400H120V250Z" fill="#9B59B6"/>
+    
+    <!-- Medical Cross -->
+    <path d="M180 100H220V140H180V100Z" fill="#FFFFFF"/>
+    <path d="M160 120H240V140H160V120Z" fill="#FFFFFF"/>
+    
+    <!-- Stethoscope -->
+    <path d="M280 200C280 200 300 220 300 240C300 260 280 280 260 280C240 280 220 260 220 240C220 220 240 200 240 200" stroke="#FFFFFF" stroke-width="4"/>
+    
+    <!-- Bone Symbol -->
+    <path d="M180 320L220 320" stroke="#FFFFFF" stroke-width="8"/>
+    <path d="M190 310L190 330" stroke="#FFFFFF" stroke-width="8"/>
+    <path d="M210 310L210 330" stroke="#FFFFFF" stroke-width="8"/>
+    
+    <!-- Name -->
+    <text x="200" y="450" text-anchor="middle" font-family="Arial" font-size="16" fill="#2C3E50">Dr. Jett</text>
+    <text x="200" y="470" text-anchor="middle" font-family="Arial" font-size="14" fill="#7F8C8D">Orthopedic Surgeon</text>
+</svg> 

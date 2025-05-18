@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="300" fill="#F8F9FA"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="200" cy="150" r="100" fill="#E9ECEF"/>
+    
+    <!-- Main Symbol -->
+    <g transform="translate(200,150)">
+        <!-- People Group -->
+        <g>
+            <!-- Person 1 -->
+            <circle cx="-30" cy="-20" r="15" fill="#4A90E2" opacity="0.8"/>
+            <path d="M-30 5 L-30 40" stroke="#4A90E2" stroke-width="4"/>
+            <path d="M-30 40 L-45 60" stroke="#4A90E2" stroke-width="4"/>
+            <path d="M-30 40 L-15 60" stroke="#4A90E2" stroke-width="4"/>
+            
+            <!-- Person 2 -->
+            <circle cx="0" cy="-20" r="15" fill="#FF6B6B" opacity="0.8"/>
+            <path d="M0 5 L0 40" stroke="#FF6B6B" stroke-width="4"/>
+            <path d="M0 40 L-15 60" stroke="#FF6B6B" stroke-width="4"/>
+            <path d="M0 40 L15 60" stroke="#FF6B6B" stroke-width="4"/>
+            
+            <!-- Person 3 -->
+            <circle cx="30" cy="-20" r="15" fill="#4A90E2" opacity="0.8"/>
+            <path d="M30 5 L30 40" stroke="#4A90E2" stroke-width="4"/>
+            <path d="M30 40 L15 60" stroke="#4A90E2" stroke-width="4"/>
+            <path d="M30 40 L45 60" stroke="#4A90E2" stroke-width="4"/>
+        </g>
+        
+        <!-- Connection Lines -->
+        <path d="M-30 -20 Q0 -30 30 -20" stroke="#6C757D" stroke-width="2" fill="none" opacity="0.3"/>
+        <path d="M-30 40 Q0 50 30 40" stroke="#6C757D" stroke-width="2" fill="none" opacity="0.3"/>
+    </g>
+    
+    <!-- Animated Elements -->
+    <circle cx="150" cy="100" r="4" fill="#4A90E2" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="200" r="3" fill="#FF6B6B" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+</svg> 

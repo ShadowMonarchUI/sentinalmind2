@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="300" height="300" fill="#E8F0FE"/>
+    
+    <!-- Doctor Figure -->
+    <circle cx="150" cy="100" r="60" fill="#4A90E2"/>
+    <path d="M90 180C90 150 120 135 150 135C180 135 210 150 210 180V300H90V180Z" fill="#4A90E2"/>
+    
+    <!-- Medical Cross -->
+    <path d="M135 75H165V105H135V75Z" fill="#FFFFFF"/>
+    <path d="M120 90H180V105H120V90Z" fill="#FFFFFF"/>
+    
+    <!-- Stethoscope -->
+    <path d="M210 150C210 150 225 165 225 180C225 195 210 210 195 210C180 210 165 195 165 180C165 165 180 150 180 150" stroke="#FFFFFF" stroke-width="3"/>
+    
+    <!-- Heart Symbol -->
+    <path d="M150 240C150 240 135 225 135 210C135 195 150 180 165 180C180 180 195 195 195 210C195 225 180 240 180 240" fill="#FF6B6B"/>
+    
+    <!-- Name -->
+    <text x="150" y="270" text-anchor="middle" font-family="Arial" font-size="14" fill="#2C3E50">Dr. John Smith</text>
+    <text x="150" y="285" text-anchor="middle" font-family="Arial" font-size="12" fill="#7F8C8D">Cardiologist</text>
+</svg> 

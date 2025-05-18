@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Elements -->
+    <rect width="800" height="600" fill="#E3F2FD"/>
+    <circle cx="400" cy="300" r="250" fill="#BBDEFB" opacity="0.5"/>
+    
+    <!-- Medical Cross -->
+    <g transform="translate(200, 150)">
+        <circle cx="100" cy="100" r="80" fill="white"/>
+        <path d="M100 40 L100 160" stroke="#2196F3" stroke-width="8"/>
+        <path d="M40 100 L160 100" stroke="#2196F3" stroke-width="8"/>
+    </g>
+    
+    <!-- Heart Pulse -->
+    <g transform="translate(400, 200)">
+        <path d="M0 50 C0 50, 50 0, 100 50 C150 100, 200 0, 250 50" stroke="#2196F3" stroke-width="4" fill="none"/>
+        <circle cx="0" cy="50" r="4" fill="#2196F3"/>
+        <circle cx="100" cy="50" r="4" fill="#2196F3"/>
+        <circle cx="250" cy="50" r="4" fill="#2196F3"/>
+    </g>
+    
+    <!-- Decorative Elements -->
+    <circle cx="600" cy="150" r="30" fill="#64B5F6" opacity="0.3"/>
+    <circle cx="650" cy="200" r="20" fill="#64B5F6" opacity="0.3"/>
+    <circle cx="550" cy="250" r="25" fill="#64B5F6" opacity="0.3"/>
+    
+    <!-- Connection Lines -->
+    <path d="M300 300 L500 300" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5"/>
+    <path d="M400 200 L400 400" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5"/>
+    
+    <!-- Medical Icons -->
+    <g transform="translate(500, 350)">
+        <circle cx="0" cy="0" r="40" fill="white"/>
+        <path d="M-20 0 L20 0" stroke="#2196F3" stroke-width="4"/>
+        <path d="M0 -20 L0 20" stroke="#2196F3" stroke-width="4"/>
+    </g>
+    
+    <g transform="translate(300, 350)">
+        <circle cx="0" cy="0" r="40" fill="white"/>
+        <path d="M-15 -15 L15 15" stroke="#2196F3" stroke-width="4"/>
+        <path d="M-15 15 L15 -15" stroke="#2196F3" stroke-width="4"/>
+    </g>
+</svg> 
